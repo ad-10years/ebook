@@ -10,7 +10,7 @@ module.exports = {
     },
     output: {
         path: __dirname + "/docs",
-        filename: './javascripts/[name].js'
+        filename: './javascripts/[name].[hash:8].js'
     },
     module: {
         loaders: [
@@ -30,7 +30,7 @@ module.exports = {
         ]
     },
     plugins:[
-        new ExtractTextPlugin({ filename: './stylesheets/[name].css', disable: false, allChunks: true }),
+        new ExtractTextPlugin({ filename: './stylesheets/[name].[hash:8].css', disable: false, allChunks: true }),
 
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/index.html', //生成的html存放路径，相对于path
