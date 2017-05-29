@@ -80,7 +80,6 @@ main article section {
 }
 button.big {
   background-color: transparent;
-  border: 2px black solid;
   color: black;
   margin: 1rem auto;
   height: 2.5rem;
@@ -92,15 +91,24 @@ button.big:hover {
   border: 2px transparent solid;
   background-color: black;
 }
+footer {
+  padding-top: 2rem;
+  width: 100%;
+  text-align: center;
+}
 @media only screen and (max-device-width: 768px) {
   button.big {
     width: 100%;
     display: block;
+    border: 1px lightgrey solid;
+    border-left: 2px transparent solid;
+    border-right: 2px transparent solid;
   }
 }
 @media only screen and (min-device-width: 768px) {
   button.big {
     width: 350px;
+    border: 2px black solid;
   }
 }
 *::-webkit-scrollbar {
