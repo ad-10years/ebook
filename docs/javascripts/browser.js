@@ -88,7 +88,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 var iframeView = document.getElementById("view");
-var $iframe = $("#view").contents();
 
 document.addEventListener("click", function (event) {
     var id = _DOMtracker2.default.getValByAttr("id", event.target);
@@ -109,19 +108,12 @@ document.addEventListener("click", function (event) {
     elNode = _DOMtracker2.default.getNodeByAttr("data-goto-target", event.target);
     //链接内部跳转
     if (elNode) {
-        //iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target")).scrollIntoView()
-        //iframeView.contentDocument.body.scrollTop -=150
         var targetEl = iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target"));
         _hightlight2.default.goto(targetEl, iframeView.contentDocument.body, 150);
-        //let elID = elNode.getAttribute("data-goto-target")
-        //console.log("set height to ",$iframe)
-        //$iframe.find("body").animate({scrollTop:$iframe.find("#" + elID).scrollTop() - 300},800);
         menuSwitch(false);
     }
-
     //链接页面跳转检测
     linkTo(event.target);
-
     //内部page切换检测
     elNode = _DOMtracker2.default.getNodeByAttr("data-page", event.target);
     if (elNode) {
