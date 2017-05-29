@@ -4,69 +4,76 @@
 
 import DOMtracker from "../components/DOMtracker"
 import hightlight from  "../components/hightlight"
-
+import attrListener from "../components/AttrListener"
 
 let iframeView = document.getElementById("view")
+let mainAttrListener = new attrListener()
 
-document.addEventListener("click",function (event) {
-    let id = DOMtracker.getValByAttr("id",event.target)
-    let elNode
-    if(id){
-        switch (id){
-            case "menu":
-                menuSwitch()
-                break;
-            case "":
-                break
-            default:
-                break
-
-        }
-    }
-
-   elNode = DOMtracker.getNodeByAttr("data-goto-target",event.target)
-    //链接内部跳转
-    if(elNode){
-        let targetEl = iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target"))
-        hightlight.goto(targetEl,iframeView.contentDocument.body,150)
-        menuSwitch(false)
-    }
-    //链接页面跳转检测
-    linkTo(event.target)
-    //内部page切换检测
-    elNode = DOMtracker.getNodeByAttr("data-page",event.target)
-    if(elNode){
-        let dataPage = elNode.getAttribute("data-page");
-        $(".page").removeClass("is-active")
-        $("[data-page-target="+ dataPage+"]").addClass("is-active")
-
-        $(".title-selector").removeClass("is-active")
-        elNode.classList.add("is-active")
-    }
-
-})
 iframeView.onload=function () {
+    document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
     hightlight.listen(iframeView.contentDocument.body)
-    chapterGenerate()
+
     iframeView.contentDocument.body.addEventListener("click",function (event) {
         //链接页面跳转检测
-        linkTo(event.target)
+        mainAttrListener.pushEvent(event.target)
     })
 }
-function chapterGenerate() {
-    let insertPoint = document.querySelector("#chapter-insert");
-    let template = ""
 
-    var nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-goto-trigger]")
-    // add this line.
-    nodeList = Array.prototype.slice.call(nodeList);
-    for(let section of nodeList){
-        let sectionID = section.getAttribute("data-goto-trigger")
-        let sectionName = section.getAttribute("data-goto-title")
-        template +=`<li><button data-goto-target="${sectionID}" class=" childChapter">${sectionName}</button></li>`
+mainAttrListener.add("data-page",innerPageJumping)
+mainAttrListener.add("data-href",hrefJumping )
+mainAttrListener.add("data-anchor",anchorJumping)
+
+function anchorJumping(eventTarget,attrVal) {
+    //链接内部跳转
+    let anchorElement = iframeView.contentDocument.getElementById(attrVal)
+    hightlight.goto(anchorElement,iframeView.contentDocument.body,150)
+    menuSwitch(false)
+}
+
+function hrefJumping(eventTarget,attrVal) {
+    //链接内部跳转
+    iframeView.src = attrVal
+    $("[data-href]").removeClass("is-active")
+    eventTarget.classList.add("is-active")
+    menuSwitch(false)
+}
+
+function innerPageJumping(eventTarget,attrVal) {
+    $(".page").removeClass("is-active")
+    $("[data-page-target="+ attrVal+"]").addClass("is-active")
+
+    $(".title-selector").removeClass("is-active")
+    eventTarget.classList.add("is-active")
+    menuSwitch(true)
+}
+
+mainAttrListener.add("id",function (eventTarget,id,sourceElement) {
+    switch (id){
+        case "#menu":
+            menuSwitch()
+            break;
+        case "":
+            break
+        default:
+            break
     }
-    insertPoint.innerHTML = template
+})
 
+document.addEventListener("click",function (event) {
+    mainAttrListener.pushEvent(event.target)
+})
+
+
+function getChapterTemplate() {
+    let template = ""
+    // polyfill of webpack ???
+    let nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-anchor-trigger]")
+    for(let section of Array.prototype.slice.call(nodeList)){
+        let sectionID = section.getAttribute("data-anchor-trigger")
+        let sectionName = section.getAttribute("data-goto-title")
+        template +=`<li><button data-anchor="${sectionID}" class=" childChapter">${sectionName}</button></li>`
+    }
+    return template
 }
 function menuSwitch(status) {
     let menu = $(".popMenu");
@@ -80,14 +87,5 @@ function menuSwitch(status) {
     }else{
         menu.toggleClass("menu-active")
         menuBUtton.toggleClass("is-active")
-    }
-}
-function linkTo(checkPoint) {
-    let elNode = DOMtracker.getNodeByAttr("data-link",checkPoint)
-    if(elNode){
-        iframeView.src = elNode.getAttribute("data-link")
-        $("[data-link]").removeClass("is-active")
-        elNode.classList.add("is-active")
-        menuSwitch(false)
     }
 }

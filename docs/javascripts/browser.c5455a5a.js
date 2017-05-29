@@ -73,84 +73,95 @@
 "use strict";
 
 
-var _DOMtracker = __webpack_require__(5);
+var _DOMtracker = __webpack_require__(6);
 
 var _DOMtracker2 = _interopRequireDefault(_DOMtracker);
 
-var _hightlight = __webpack_require__(6);
+var _hightlight = __webpack_require__(7);
 
 var _hightlight2 = _interopRequireDefault(_hightlight);
 
+var _AttrListener = __webpack_require__(5);
+
+var _AttrListener2 = _interopRequireDefault(_AttrListener);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dogfish on 2017/5/22.
- */
+var iframeView = document.getElementById("view"); /**
+                                                   * Created by Dogfish on 2017/5/22.
+                                                   */
 
-var iframeView = document.getElementById("view");
+var mainAttrListener = new _AttrListener2.default();
 
-document.addEventListener("click", function (event) {
-    var id = _DOMtracker2.default.getValByAttr("id", event.target);
-    var elNode = void 0;
-    if (id) {
-        switch (id) {
-            case "menu":
-                menuSwitch();
-                break;
-            case "":
-                break;
-            default:
-                break;
-
-        }
-    }
-
-    elNode = _DOMtracker2.default.getNodeByAttr("data-goto-target", event.target);
-    //链接内部跳转
-    if (elNode) {
-        var targetEl = iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target"));
-        _hightlight2.default.goto(targetEl, iframeView.contentDocument.body, 150);
-        menuSwitch(false);
-    }
-    //链接页面跳转检测
-    linkTo(event.target);
-    //内部page切换检测
-    elNode = _DOMtracker2.default.getNodeByAttr("data-page", event.target);
-    if (elNode) {
-        var dataPage = elNode.getAttribute("data-page");
-        $(".page").removeClass("is-active");
-        $("[data-page-target=" + dataPage + "]").addClass("is-active");
-
-        $(".title-selector").removeClass("is-active");
-        elNode.classList.add("is-active");
-    }
-});
 iframeView.onload = function () {
+    document.getElementById("chapter-insert").innerHTML = getChapterTemplate();
     _hightlight2.default.listen(iframeView.contentDocument.body);
-    chapterGenerate();
+
     iframeView.contentDocument.body.addEventListener("click", function (event) {
         //链接页面跳转检测
-        linkTo(event.target);
+        mainAttrListener.pushEvent(event.target);
     });
 };
-function chapterGenerate() {
-    var insertPoint = document.querySelector("#chapter-insert");
-    var template = "";
 
-    var nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-goto-trigger]");
-    // add this line.
-    nodeList = Array.prototype.slice.call(nodeList);
+mainAttrListener.add("data-page", innerPageJumping);
+mainAttrListener.add("data-href", hrefJumping);
+mainAttrListener.add("data-anchor", anchorJumping);
+
+function anchorJumping(eventTarget, attrVal) {
+    //链接内部跳转
+    var anchorElement = iframeView.contentDocument.getElementById(attrVal);
+    _hightlight2.default.goto(anchorElement, iframeView.contentDocument.body, 150);
+    menuSwitch(false);
+}
+
+function hrefJumping(eventTarget, attrVal) {
+    //链接内部跳转
+    iframeView.src = attrVal;
+    $("[data-href]").removeClass("is-active");
+    eventTarget.classList.add("is-active");
+    menuSwitch(false);
+}
+
+function innerPageJumping(eventTarget, attrVal) {
+    $(".page").removeClass("is-active");
+    $("[data-page-target=" + attrVal + "]").addClass("is-active");
+
+    $(".title-selector").removeClass("is-active");
+    eventTarget.classList.add("is-active");
+    menuSwitch(true);
+}
+
+mainAttrListener.add("id", function (eventTarget, id, sourceElement) {
+    switch (id) {
+        case "menu":
+            menuSwitch();
+            break;
+        case "":
+            break;
+        default:
+            break;
+    }
+});
+
+document.addEventListener("click", function (event) {
+    mainAttrListener.pushEvent(event.target);
+});
+
+function getChapterTemplate() {
+    var template = "";
+    // polyfill of webpack ???
+    var nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-anchor-trigger]");
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
     var _iteratorError = undefined;
 
     try {
-        for (var _iterator = nodeList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
             var section = _step.value;
 
-            var sectionID = section.getAttribute("data-goto-trigger");
+            var sectionID = section.getAttribute("data-anchor-trigger");
             var sectionName = section.getAttribute("data-goto-title");
-            template += "<li><button data-goto-target=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
+            template += "<li><button data-anchor=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
         }
     } catch (err) {
         _didIteratorError = true;
@@ -167,7 +178,7 @@ function chapterGenerate() {
         }
     }
 
-    insertPoint.innerHTML = template;
+    return template;
 }
 function menuSwitch(status) {
     var menu = $(".popMenu");
@@ -181,15 +192,6 @@ function menuSwitch(status) {
     } else {
         menu.toggleClass("menu-active");
         menuBUtton.toggleClass("is-active");
-    }
-}
-function linkTo(checkPoint) {
-    var elNode = _DOMtracker2.default.getNodeByAttr("data-link", checkPoint);
-    if (elNode) {
-        iframeView.src = elNode.getAttribute("data-link");
-        $("[data-link]").removeClass("is-active");
-        elNode.classList.add("is-active");
-        menuSwitch(false);
     }
 }
 
@@ -216,6 +218,85 @@ __webpack_require__(0);
 /***/ }),
 /* 4 */,
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by Dogfish on 2017/5/30.
+ */
+//从某个指定节点开始，一直往上爬取所有注册属性的回调函数，并且执行
+function attrListener() {
+    this.attrList = {};
+}
+
+attrListener.prototype.pushEvent = function (eventTarget) {
+    var sourceElement = eventTarget;
+
+    do {
+        for (var attr in this.attrList) {
+            var attrVal = eventTarget.getAttribute(attr);
+            if (attrVal) {
+                var _iteratorNormalCompletion = true;
+                var _didIteratorError = false;
+                var _iteratorError = undefined;
+
+                try {
+                    for (var _iterator = this.attrList[attr][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                        var callback = _step.value;
+
+                        callback(eventTarget, attrVal, sourceElement);
+                    }
+                } catch (err) {
+                    _didIteratorError = true;
+                    _iteratorError = err;
+                } finally {
+                    try {
+                        if (!_iteratorNormalCompletion && _iterator.return) {
+                            _iterator.return();
+                        }
+                    } finally {
+                        if (_didIteratorError) {
+                            throw _iteratorError;
+                        }
+                    }
+                }
+            }
+        }
+        eventTarget = eventTarget.parentElement;
+        if (!eventTarget) {
+            return;
+        }
+    } while (true);
+};
+
+attrListener.prototype.add = function (attr, callback) {
+    if (!this.attrList.hasOwnProperty(attr)) {
+        this.attrList[attr] = [];
+    }
+
+    if (!this.attrList[attr].includes(callback)) {
+        this.attrList[attr].push(callback);
+    }
+};
+
+attrListener.prototype.remove = function (attr, callback) {
+    if (!attr && !callback) {
+        this.attrList = {};
+    }
+    if (attr && !callback && this.attrList.hasOwnProperty(attr)) {
+        delete this.attrList[attr];
+    }
+};
+
+exports.default = attrListener;
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -270,7 +351,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -289,10 +370,10 @@ var hg = {
             target = document.body;
         }
         if (!sectionAttr) {
-            sectionAttr = "data-goto-trigger";
+            sectionAttr = "data-anchor-trigger";
         }
         if (!triggerAttr) {
-            triggerAttr = "data-goto-target";
+            triggerAttr = "data-anchor";
         }
         if (!activeClass) {
             activeClass = "is-active";

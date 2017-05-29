@@ -5,8 +5,8 @@
 let hg= {
     listen:function (target,removeCallback,addCallback,triggerAttr,sectionAttr,activeClass) {
         if(!target){target = document.body}
-        if(!sectionAttr){sectionAttr = "data-goto-trigger"}
-        if(!triggerAttr){triggerAttr = "data-goto-target"}
+        if(!sectionAttr){sectionAttr = "data-anchor-trigger"}
+        if(!triggerAttr){triggerAttr = "data-anchor"}
         if(!activeClass){activeClass = "is-active"}
         let lastedSectionID
         target.onscroll  = function () {
