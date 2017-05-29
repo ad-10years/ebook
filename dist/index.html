@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/materialize/0.98.2/css/materialize.min.css" rel="stylesheet">
+
+    <link href="./stylesheets/browser.css" rel="stylesheet">
+
+</head>
+<!--script type="text/javascript" src="/lite/youziku.api.min.js"></script-->
+
+<body>
+<main>
+
+    <div class="popMenu menu-mini">
+        <div class="content">
+            <div class="page is-active" data-page-target="chapter-content">
+                <div class="row content">
+                    <div>
+                        <div class="col s12 subText">
+                            <span class="flow-text">起·舞弄清影</span>
+                        </div>
+                        <div class="col s12 mainText">
+                            <h1>十年一觉广告梦</h1>
+                        </div>
+                        <div class="col s12 subText">
+                            <span class="chapterTitle">文章分节</span>
+                            <span class="tips">提示:点击下列标题可跳转到文章位置</span>
+                        </div>
+
+                        <div class="col s12 links">
+                            <ul id="chapter-insert" class="section links-inner ">
+                                <li>
+                                    <button  class=" childChapter">基础介绍</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">页面结构</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">初始化开始</button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="page" data-page-target="chapter-list">
+                <div class="col s12 content">
+                    <div class="col s12 subText">
+                        <span class="flow-text">内容列表</span>
+                    </div>
+                    <div class="col s12 links">
+                        <ul class="section links-inner">
+                            <li>
+                                <button data-link="./contents/封面.html" class="childChapter">开始阅读</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="col s12 mainText">
+                            <h1>起·舞弄清影</h1>
+                        </div>
+                        <div class="col s12 links">
+                            <ul class="section links-inner">
+                                <li>
+                                    <button data-link="./contents/十年一觉广告梦.html" class="childChapter">第一章：十年一觉广告梦</button>
+                                </li>
+                                <li>
+                                    <button class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button class=" childChapter">第三章：未确定的标题内容</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col s12 mainText">
+                            <h1>承·恩雨露流</h1>
+                        </div>
+                        <div class="col s12 links">
+                            <ul class="section links-inner">
+                                <li>
+                                    <button  class=" childChapter">第一章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col s12 mainText">
+                            <h1>转·眼光阴暑渐除</h1>
+                        </div>
+                        <div class="col s12 links">
+                            <ul class="section links-inner">
+                                <li>
+                                    <button   class="childChapter">第一章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col s12 mainText">
+                            <h1>合·睦此生乐百年</h1>
+                        </div>
+                        <div class="col s12 links">
+                            <ul class="section links-inner">
+                                <li>
+                                    <button   class="childChapter">第一章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                                <li>
+                                    <button  class=" childChapter">第二章：未确定的标题内容</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row title">
+                <div class="col s12">
+                    <a href="#" class="is-active title-selector" data-page="chapter-content"><span
+                            class="flow-text">章节</span></a>
+                    <span class="flow-text">|</span>
+                    <a href="#" class="title-selector" data-page="chapter-list"><span class="flow-text">目录</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="mask">
+        </div>
+    </div>
+
+
+
+
+    <div id="view-outer">
+        <iframe id="view" src="./contents/封面.html"></iframe>
+    </div>
+    <div class="control-bar">
+        <a id="menu" class="btn waves-effect waves-light">
+            <div class="hamburger hamburger--collapse">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </div>
+        </a>
+
+    </div>
+</main>
+</body>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js"></script>
+<link href="https://cdn.bootcss.com/hamburgers/0.8.1/hamburgers.min.css" rel="stylesheet">
+<script src="./javascripts/browser.js"></script>
+
+</html>
