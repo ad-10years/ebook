@@ -86,7 +86,7 @@ function linkTo(checkPoint) {
     let elNode = DOMtracker.getNodeByAttr("data-link",checkPoint)
     if(elNode){
         iframeView.src = elNode.getAttribute("data-link")
-        $(".data-link").removeClass("is-active")
+        $("[data-link]").removeClass("is-active")
         elNode.classList.add("is-active")
         menuSwitch(false)
     }
