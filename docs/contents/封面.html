@@ -15,7 +15,6 @@
         width: 100%;
         height: 100%;
         background-color: whitesmoke;
-        background-image: url("");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: 50% 50%;
@@ -89,7 +88,7 @@
 
 
     if(is_weixn()){
-        var videoLink = "http://oocd4kz4f.bkt.clouddn.com/index-background.mp4"
+        var videoLink = "http://oocd4kz4f.bkt.clouddn.com/index-background-2.mp4"
         var warpper = document.getElementById("backgroundPolyfill").innerHTML
         warpper = warpper.replace(/REPLACE_LINK/g,videoLink)
         document.getElementById("particles-js").innerHTML = warpper
@@ -103,7 +102,7 @@
         script.onload = function () { particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 150,
+                    "value": 200,
                     "density": {
                         "enable": false,
                         "value_area": 900
@@ -138,7 +137,7 @@
                     }
                 },
                 "size": {
-                    "value": 15,
+                    "value": 30,
                     "random": true,
                     "anim": {
                         "enable": true,
@@ -156,7 +155,7 @@
                 },
                 "move": {
                     "enable": true,
-                    "speed": 0.4,
+                    "speed": 1.2,
                     "direction": "bottom",
                     "random": true,
                     "straight": false,
