@@ -52,6 +52,13 @@ main article p.title {
   line-height: 1.5rem;
   letter-spacing: .05rem;
 }
+main article p.em {
+  font-weight: bolder;
+  text-align: center;
+  padding-bottom: 1rem;
+  text-indent: 0;
+  letter-spacing: .05rem;
+}
 main article p.sub-title {
   font-size: 1.1rem;
   font-weight: bold;
