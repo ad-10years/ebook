@@ -67,8 +67,9 @@ let hg= {
             lastedSectionID = sectionID;
         }
     },
-    goto:function ($node) {
-        $node.scrollIntoView()
+    goto:function ($node,$screen,offset) {
+        let targetTop = $node.offsetTop;
+        $screen.scrollTop = targetTop - offset
     }
 }
 

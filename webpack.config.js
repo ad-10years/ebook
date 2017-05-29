@@ -8,7 +8,7 @@ module.exports = {
         common:"./src/common/entry.js"
     },
     output: {
-        filename: './dist/javascripts/[name].js'
+        filename: './docs/javascripts/[name].js'
     },
     module: {
         loaders: [
@@ -28,7 +28,7 @@ module.exports = {
         ]
     },
     plugins:[
-        new ExtractTextPlugin('./dist/stylesheets/[name].css'),
+        new ExtractTextPlugin('./docs/stylesheets/[name].css'),
     ]
 };
 

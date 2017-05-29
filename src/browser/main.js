@@ -7,7 +7,7 @@ import hightlight from  "../components/hightlight"
 
 
 let iframeView = document.getElementById("view")
-
+let $iframe = $("#view").contents();
 
 document.addEventListener("click",function (event) {
     let id = DOMtracker.getValByAttr("id",event.target)
@@ -28,8 +28,13 @@ document.addEventListener("click",function (event) {
    elNode = DOMtracker.getNodeByAttr("data-goto-target",event.target)
     //链接内部跳转
     if(elNode){
-        iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target")).scrollIntoView()
-        iframeView.contentDocument.body.scrollTop -=150
+        //iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target")).scrollIntoView()
+        //iframeView.contentDocument.body.scrollTop -=150
+        let targetEl = iframeView.contentDocument.getElementById(elNode.getAttribute("data-goto-target"))
+        hightlight.goto(targetEl,iframeView.contentDocument.body,150)
+        //let elID = elNode.getAttribute("data-goto-target")
+        //console.log("set height to ",$iframe)
+        //$iframe.find("body").animate({scrollTop:$iframe.find("#" + elID).scrollTop() - 300},800);
         menuSwitch(false)
     }
 
