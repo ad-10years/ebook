@@ -62,8 +62,11 @@
     }
 </style>
 <body>
-<script src="//cdn.jsdelivr.net/eruda/1.2.2/eruda.min.js"></script>
-<script>eruda.init();</script>
+<script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js"></script>
+<script>
+    console.log('Hello world');
+    // then tap vConsole button to see the log
+</script>
 <header>
     <div class="title">
         <h1>十年一觉广告梦</h1>
@@ -213,7 +216,9 @@
     }
     function is_weixn(){
         var ua = navigator.userAgent.toLowerCase();
-        if(ua.match(/MicroMessenger/i) == "micromessenger") {
+        console.log("ua is ", ua)
+        console.log("check result",ua.match(/MicroMessenger/i) === "micromessenger")
+        if(ua.match(/MicroMessenger/i) === "micromessenger") {
             return true;
         } else {
             return false;
