@@ -63,6 +63,7 @@
 </style>
 <body>
 <script src="../../javascripts/vconsole.min.js"></script>
+<script src="../../javascripts/background-video.min.js"></script>
 <header>
     <div class="title">
         <h1>十年一觉广告梦</h1>
@@ -75,16 +76,20 @@
 </header>
 
 <div id="particles-js">
-
+    <video class="bv-video"></video>
 </div>
+
 </body>
 
 <script>
 
 
     if(is_weixn()){
-        document.getElementById("particles-js").innerHTML = "<video autoplay loop src='http://oocd4kz4f.bkt.clouddn.com/index-background-2.mp4'></video>"
-        document.querySelector('video').play();
+        backgroundVideo = new BackgroundVideo('.bv-video', {
+            src: [
+                'http://oocd4kz4f.bkt.clouddn.com/index-background-2.mp4',
+            ]
+        });
         console.log("video-background polyfill started")
     }else{
         var script = document.createElement('script');
