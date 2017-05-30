@@ -92,6 +92,7 @@
         warpper = warpper.replace(/REPLACE_LINK/g,videoLink)
         document.getElementById("particles-js").innerHTML = warpper
         console.log("video-background polyfill started")
+        video = document.querySelector('video').play();
     }else{
 
         var script = document.createElement('script');
@@ -216,6 +217,6 @@
         console.log("check result",/micromessenger/.test(navigator.userAgent.toLowerCase()))
         return /micromessenger/.test(navigator.userAgent.toLowerCase())
     }
-</script> 
+</script>
 
 </html>
