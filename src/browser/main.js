@@ -1,43 +1,24 @@
 /**
  * Created by Dogfish on 2017/5/22.
  */
-
-import DOMtracker from "../components/DOMtracker"
 import hightlight from  "../components/hightlight"
 import attrListener from "../components/AttrListener"
-
-let iframeView = document.getElementById("view")
+//attr listneer
 let mainAttrListener = new attrListener()
-
-iframeView.onload=function () {
-    document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
-    hightlight.listen(iframeView.contentDocument.body)
-
-    iframeView.contentDocument.body.addEventListener("click",function (event) {
-        //链接页面跳转检测
-        mainAttrListener.pushEvent(event.target)
-    })
-}
-
-mainAttrListener.add("data-page",innerPageJumping)
-mainAttrListener.add("data-href",hrefJumping )
-mainAttrListener.add("data-anchor",anchorJumping)
-
-function anchorJumping(eventTarget,attrVal) {
+function anchorJumping(element,attrVal) {
     //链接内部跳转
+    let iframeView = document.getElementById("view")
     let anchorElement = iframeView.contentDocument.getElementById(attrVal)
     hightlight.goto(anchorElement,iframeView.contentDocument.body,150)
     menuSwitch(false)
 }
-
-function hrefJumping(eventTarget,attrVal) {
+function hrefJumping(element,attrVal) {
     //链接内部跳转
-    iframeView.src = attrVal
     $("[data-href]").removeClass("is-active")
-    eventTarget.classList.add("is-active")
+    $(`[data-href="${attrVal}"]`).addClass("is-active")
+    document.getElementById("view").src = attrVal
     menuSwitch(false)
 }
-
 function innerPageJumping(eventTarget,attrVal) {
     $(".page").removeClass("is-active")
     $("[data-page-target="+ attrVal+"]").addClass("is-active")
@@ -46,8 +27,7 @@ function innerPageJumping(eventTarget,attrVal) {
     eventTarget.classList.add("is-active")
     menuSwitch(true)
 }
-
-mainAttrListener.add("id",function (eventTarget,id,sourceElement) {
+function idEventDispatch(eventTarget,id) {
     switch (id){
         case "#menu":
             menuSwitch()
@@ -57,15 +37,11 @@ mainAttrListener.add("id",function (eventTarget,id,sourceElement) {
         default:
             break
     }
-})
-
-document.addEventListener("click",function (event) {
-    mainAttrListener.pushEvent(event.target)
-})
-
-
+}
+//functional
 function getChapterTemplate() {
     let template = ""
+    let iframeView = document.getElementById("view")
     // polyfill of webpack ???
     let nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-anchor-trigger]")
     for(let section of Array.prototype.slice.call(nodeList)){
@@ -89,3 +65,22 @@ function menuSwitch(status) {
         menuBUtton.toggleClass("is-active")
     }
 }
+function iframeContentInitial() {
+
+    let iframeView = document.getElementById("view")
+    document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
+    document.getElementById("view").contentDocument.body.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
+    hightlight.listen(iframeView.contentDocument.body)
+}
+//initial
+
+(function main() {
+    mainAttrListener.add("data-page",innerPageJumping)
+    mainAttrListener.add("data-href",hrefJumping )
+    mainAttrListener.add("data-anchor",anchorJumping)
+    mainAttrListener.add("id",idEventDispatch)
+
+    document.getElementById("view").onload= iframeContentInitial
+    document.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
+
+})()

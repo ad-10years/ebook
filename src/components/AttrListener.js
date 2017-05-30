@@ -11,10 +11,12 @@ attrListener.prototype.pushEvent = function (eventTarget) {
 
     do {
         for(let attr in this.attrList){
+            if(!eventTarget.hasAttribute(attr)){continue}
+
             let attrVal = eventTarget.getAttribute(attr)
             if (attrVal) {
-                for(let callback of this.attrList[attr]){
-                    callback(eventTarget,attrVal,sourceElement)
+                for(let i in this.attrList[attr]){
+                    this.attrList[attr][i](eventTarget,attrVal,sourceElement)
                 }
             }
         }

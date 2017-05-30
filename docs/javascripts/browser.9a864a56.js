@@ -73,11 +73,7 @@
 "use strict";
 
 
-var _DOMtracker = __webpack_require__(6);
-
-var _DOMtracker2 = _interopRequireDefault(_DOMtracker);
-
-var _hightlight = __webpack_require__(7);
+var _hightlight = __webpack_require__(6);
 
 var _hightlight2 = _interopRequireDefault(_hightlight);
 
@@ -87,41 +83,25 @@ var _AttrListener2 = _interopRequireDefault(_AttrListener);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var iframeView = document.getElementById("view"); /**
-                                                   * Created by Dogfish on 2017/5/22.
-                                                   */
-
+//attr listneer
+/**
+ * Created by Dogfish on 2017/5/22.
+ */
 var mainAttrListener = new _AttrListener2.default();
-
-iframeView.onload = function () {
-    document.getElementById("chapter-insert").innerHTML = getChapterTemplate();
-    _hightlight2.default.listen(iframeView.contentDocument.body);
-
-    iframeView.contentDocument.body.addEventListener("click", function (event) {
-        //链接页面跳转检测
-        mainAttrListener.pushEvent(event.target);
-    });
-};
-
-mainAttrListener.add("data-page", innerPageJumping);
-mainAttrListener.add("data-href", hrefJumping);
-mainAttrListener.add("data-anchor", anchorJumping);
-
-function anchorJumping(eventTarget, attrVal) {
+function anchorJumping(element, attrVal) {
     //链接内部跳转
+    var iframeView = document.getElementById("view");
     var anchorElement = iframeView.contentDocument.getElementById(attrVal);
     _hightlight2.default.goto(anchorElement, iframeView.contentDocument.body, 150);
     menuSwitch(false);
 }
-
-function hrefJumping(eventTarget, attrVal) {
+function hrefJumping(element, attrVal) {
     //链接内部跳转
-    iframeView.src = attrVal;
     $("[data-href]").removeClass("is-active");
-    eventTarget.classList.add("is-active");
+    $("[data-href=\"" + attrVal + "\"]").addClass("is-active");
+    document.getElementById("view").src = attrVal;
     menuSwitch(false);
 }
-
 function innerPageJumping(eventTarget, attrVal) {
     $(".page").removeClass("is-active");
     $("[data-page-target=" + attrVal + "]").addClass("is-active");
@@ -130,8 +110,7 @@ function innerPageJumping(eventTarget, attrVal) {
     eventTarget.classList.add("is-active");
     menuSwitch(true);
 }
-
-mainAttrListener.add("id", function (eventTarget, id, sourceElement) {
+function idEventDispatch(eventTarget, id) {
     switch (id) {
         case "#menu":
             menuSwitch();
@@ -141,14 +120,11 @@ mainAttrListener.add("id", function (eventTarget, id, sourceElement) {
         default:
             break;
     }
-});
-
-document.addEventListener("click", function (event) {
-    mainAttrListener.pushEvent(event.target);
-});
-
+}
+//functional
 function getChapterTemplate() {
     var template = "";
+    var iframeView = document.getElementById("view");
     // polyfill of webpack ???
     var nodeList = iframeView.contentDocument.body.querySelectorAll("section[data-anchor-trigger]");
     var _iteratorNormalCompletion = true;
@@ -194,6 +170,28 @@ function menuSwitch(status) {
         menuBUtton.toggleClass("is-active");
     }
 }
+function iframeContentInitial() {
+
+    var iframeView = document.getElementById("view");
+    document.getElementById("chapter-insert").innerHTML = getChapterTemplate();
+    document.getElementById("view").contentDocument.body.addEventListener("click", function (event) {
+        mainAttrListener.pushEvent(event.target);
+    });
+    _hightlight2.default.listen(iframeView.contentDocument.body);
+}
+//initial
+
+(function main() {
+    mainAttrListener.add("data-page", innerPageJumping);
+    mainAttrListener.add("data-href", hrefJumping);
+    mainAttrListener.add("data-anchor", anchorJumping);
+    mainAttrListener.add("id", idEventDispatch);
+
+    document.getElementById("view").onload = iframeContentInitial;
+    document.addEventListener("click", function (event) {
+        mainAttrListener.pushEvent(event.target);
+    });
+})();
 
 /***/ }),
 /* 1 */
@@ -239,31 +237,14 @@ attrListener.prototype.pushEvent = function (eventTarget) {
 
     do {
         for (var attr in this.attrList) {
+            if (!eventTarget.hasAttribute(attr)) {
+                continue;
+            }
+
             var attrVal = eventTarget.getAttribute(attr);
             if (attrVal) {
-                var _iteratorNormalCompletion = true;
-                var _didIteratorError = false;
-                var _iteratorError = undefined;
-
-                try {
-                    for (var _iterator = this.attrList[attr][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                        var callback = _step.value;
-
-                        callback(eventTarget, attrVal, sourceElement);
-                    }
-                } catch (err) {
-                    _didIteratorError = true;
-                    _iteratorError = err;
-                } finally {
-                    try {
-                        if (!_iteratorNormalCompletion && _iterator.return) {
-                            _iterator.return();
-                        }
-                    } finally {
-                        if (_didIteratorError) {
-                            throw _iteratorError;
-                        }
-                    }
+                for (var i in this.attrList[attr]) {
+                    this.attrList[attr][i](eventTarget, attrVal, sourceElement);
                 }
             }
         }
@@ -297,61 +278,6 @@ exports.default = attrListener;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-/**
- * Created by Dogfish on 2017/4/23.
- */
-exports.default = {
-    getNodeByAttr: function getNodeByAttr(attr, sourceElement) {
-        if (typeof sourceElement === "string") {
-            sourceElement = document.getElementById(sourceElement);
-        }
-
-        var attrVal = sourceElement.getAttribute(attr);
-        if (attrVal) {
-            return sourceElement;
-        }
-
-        do {
-            sourceElement = sourceElement.parentElement;
-            if (!sourceElement) {
-                return;
-            }
-            attrVal = sourceElement.getAttribute(attr);
-        } while (attrVal === null);
-
-        return sourceElement;
-    },
-    //返回最近的属性值
-    getValByAttr: function getValByAttr(attr, sourceElement) {
-        if (typeof sourceElement === "string") {
-            sourceElement = document.getElementById(sourceElement);
-        }
-        var attrVal = sourceElement.getAttribute(attr);
-        if (attrVal) {
-            return attrVal;
-        }
-        do {
-            sourceElement = sourceElement.parentElement;
-            if (!sourceElement) {
-                return attrVal;
-            }
-            attrVal = sourceElement.getAttribute(attr);
-        } while (attrVal === null);
-
-        return attrVal;
-    }
-};
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

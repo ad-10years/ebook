@@ -81,19 +81,19 @@ main {
 .popMenu > .content .page .content .mainText h1 {
   font-size: 2rem;
 }
-.popMenu > .content .page .content .subText {
-  box-sizing: border-box;
-  text-align: center;
-  -ms-flex-negative: 0;
-  flex-shrink: 0;
-}
-.popMenu > .content .page .content .subText .tips {
+.popMenu > .content .page .content .tips {
   font-size: 0.8rem;
   color: grey;
   display: block;
   width: 100%;
   padding-top: .5rem;
   text-align: center;
+}
+.popMenu > .content .page .content .subText {
+  box-sizing: border-box;
+  text-align: center;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 .popMenu > .content .page .content .links {
   box-sizing: border-box;
@@ -250,6 +250,9 @@ main {
     font-size: 1rem;
     color: grey;
   }
+  .popMenu > .content .page .content .subText .tips {
+    padding-top: .5rem;
+  }
   .popMenu > .content .page .content .links {
     box-sizing: border-box;
   }
@@ -315,12 +318,16 @@ main {
   }
   .popMenu div.content div.page.is-active div.content .subText {
     box-sizing: border-box;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: .5rem;
   }
   .popMenu div.content div.page.is-active div.content .subText span {
     font-weight: normal;
     font-size: 1rem;
     text-align: left;
+  }
+  .popMenu div.content div.page.is-active div.content .subText .tips {
+    padding-top: 0;
   }
   .popMenu div.content div.page.is-active div.content .links {
     box-sizing: border-box;
