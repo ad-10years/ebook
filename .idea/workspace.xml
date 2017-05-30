@@ -102,10 +102,10 @@
       <file leaf-file-name="封面.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/contents/起/封面.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="195" column="34" lean-forward="true" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
+            <state relative-caret-position="362">
+              <caret line="78" column="6" lean-forward="false" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
               <folding>
-                <element signature="e#2034#5108#0" expanded="false" />
+                <element signature="e#1996#5070#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -621,12 +621,12 @@
       <workItem from="1496039755219" duration="6229000" />
       <workItem from="1496046048362" duration="11454000" />
       <workItem from="1496070911142" duration="8380000" />
-      <workItem from="1496112435893" duration="8446000" />
+      <workItem from="1496112435893" duration="8516000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52002000" />
+    <option name="totallyTimeSpent" value="52072000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="0" width="2572" height="1060" extended-state="0" />
@@ -974,10 +974,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/contents/起/封面.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="195" column="34" lean-forward="true" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
+        <state relative-caret-position="362">
+          <caret line="78" column="6" lean-forward="false" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
           <folding>
-            <element signature="e#2034#5108#0" expanded="false" />
+            <element signature="e#1996#5070#0" expanded="false" />
           </folding>
         </state>
       </provider>
