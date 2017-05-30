@@ -2,6 +2,8 @@
  * Created by Dogfish on 2017/5/30.
  */
 //从某个指定节点开始，一直往上爬取所有注册属性的回调函数，并且执行
+import "./polyfill/array.includes"
+
 function attrListener() {
     this.attrList = {}
 }
