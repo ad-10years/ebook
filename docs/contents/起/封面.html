@@ -79,22 +79,14 @@
 </div>
 </body>
 
-<div id="backgroundPolyfill" style="display: none">
-    <video autoplay loop><source src="REPLACE_LINK" type="video/mp4"/></video>
-</div>
-
 <script>
 
 
     if(is_weixn()){
-        var videoLink = "http://oocd4kz4f.bkt.clouddn.com/index-background-2.mp4"
-        var warpper = document.getElementById("backgroundPolyfill").innerHTML
-        warpper = warpper.replace(/REPLACE_LINK/g,videoLink)
-        document.getElementById("particles-js").innerHTML = warpper
+        document.getElementById("particles-js").innerHTML = "<video autoplay loop src='http://oocd4kz4f.bkt.clouddn.com/index-background-2.mp4'></video>"
+        document.querySelector('video').play();
         console.log("video-background polyfill started")
-        video = document.querySelector('video').play();
     }else{
-
         var script = document.createElement('script');
         script.src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js";
         document.body.appendChild(script);
