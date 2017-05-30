@@ -213,8 +213,8 @@
     function is_weixn(){
         var ua = navigator.userAgent.toLowerCase();
         console.log("ua is ", ua)
-        console.log("check result",ua.match(/micromessenger/i) === "micromessenger")
-        if(ua.match(/micromessenger/i) === "micromessenger") {
+        console.log("check result",/micromessenger/.test(ua))
+        if(/micromessenger/.test(ua)) {
             return true;
         } else {
             return false;
