@@ -496,14 +496,19 @@ var hg = {
         };
     },
     goto: function goto($node, $screen, offset) {
+
         var targetTop = $node.offsetTop;
         var html = $screen.querySelector("html");
-        var body = $screen.querySelector("body");
+        var body = $screen.body;
+
+        console.log("html.scrollTop: ", html.scrollTop);
+        console.log("body.scrollTop: ", body.scrollTop);
+
         if (html.scrollTop) {
-            html.screenTop = targetTop - offset;
+            html.scrollTop = targetTop - offset;
         }
         if (body.scrollTop) {
-            body.screenTop = targetTop - offset;
+            body.scrollTop = targetTop - offset;
         }
     }
 };

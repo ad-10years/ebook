@@ -68,15 +68,21 @@ let hg= {
         }
     },
     goto:function ($node,$screen,offset) {
+
         let targetTop = $node.offsetTop;
         let html = $screen.querySelector("html")
-        let body = $screen.querySelector("body")
+        let body = $screen.body
+
+        console.log("html.scrollTop: ",html.scrollTop)
+        console.log("body.scrollTop: ",body.scrollTop)
+
         if(html.scrollTop){
-            html.screenTop = targetTop - offset
+            html.scrollTop = targetTop - offset
         }
         if(body.scrollTop){
-            body.screenTop = targetTop - offset
+            body.scrollTop = targetTop - offset
         }
+
     }
 }
 
