@@ -92,7 +92,7 @@ function anchorJumping(element, attrVal) {
     //链接内部跳转
     var iframeView = document.getElementById("view");
     var anchorElement = iframeView.contentDocument.getElementById(attrVal);
-    _hightlight2.default.goto(anchorElement, iframeView.contentDocument.body, 150);
+    _hightlight2.default.goto(anchorElement, iframeView.contentDocument, 150);
     menuSwitch(false);
 }
 function hrefJumping(element, attrVal) {
@@ -497,7 +497,14 @@ var hg = {
     },
     goto: function goto($node, $screen, offset) {
         var targetTop = $node.offsetTop;
-        $screen.scrollTop = targetTop - offset;
+        var html = $screen.querySelector("html");
+        var body = $screen.querySelector("body");
+        if (html.scrollTop) {
+            html.screenTop = targetTop - offset;
+        }
+        if (body.scrollTop) {
+            body.screenTop = targetTop - offset;
+        }
     }
 };
 

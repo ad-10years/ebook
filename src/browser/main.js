@@ -9,7 +9,7 @@ function anchorJumping(element,attrVal) {
     //链接内部跳转
     let iframeView = document.getElementById("view")
     let anchorElement = iframeView.contentDocument.getElementById(attrVal)
-    hightlight.goto(anchorElement,iframeView.contentDocument.body,150)
+    hightlight.goto(anchorElement,iframeView.contentDocument,150)
     menuSwitch(false)
 }
 function hrefJumping(element,attrVal) {

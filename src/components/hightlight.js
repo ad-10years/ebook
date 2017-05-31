@@ -69,7 +69,14 @@ let hg= {
     },
     goto:function ($node,$screen,offset) {
         let targetTop = $node.offsetTop;
-        $screen.scrollTop = targetTop - offset
+        let html = $screen.querySelector("html")
+        let body = $screen.querySelector("body")
+        if(html.scrollTop){
+            html.screenTop = targetTop - offset
+        }
+        if(body.scrollTop){
+            body.screenTop = targetTop - offset
+        }
     }
 }
 
