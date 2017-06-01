@@ -68,10 +68,12 @@ function menuSwitch(status) {
 }
 function iframeContentInitial() {
 
-    let iframeView = document.getElementById("view")
+    let iDoc = document.getElementById("view")
+
+    iDoc.contentDocument.body.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
+    iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height
+    hightlight.listen(iDoc.contentDocument.body)
     document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
-    document.getElementById("view").contentDocument.body.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
-    hightlight.listen(iframeView.contentDocument.body)
 }
 function gotoView($node,offset=150) {
 
