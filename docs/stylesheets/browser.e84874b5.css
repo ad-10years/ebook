@@ -314,7 +314,7 @@ main {
     font-size: 1.2rem;
     font-weight: 900;
     margin-bottom: 0;
-    padding-bottom: 10px;
+    padding: .5rem 0;
     border-bottom: 1px lightgrey solid;
   }
   .popMenu div.content div.page.is-active div.content .subText {
