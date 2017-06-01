@@ -9,7 +9,7 @@ function anchorJumping(element,attrVal) {
     //链接内部跳转
     let iframeView = document.getElementById("view")
     let anchorElement = iframeView.contentDocument.getElementById(attrVal)
-    hightlight.goto(anchorElement,iframeView.contentDocument,150)
+    gotoView(anchorElement)
     menuSwitch(false)
 }
 function hrefJumping(element,attrVal) {
@@ -71,6 +71,28 @@ function iframeContentInitial() {
     document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
     document.getElementById("view").contentDocument.body.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
     hightlight.listen(iframeView.contentDocument.body)
+}
+function gotoView($node,offset=150) {
+
+    let iframeView = document.getElementById("view")
+    let targetTop = $node.offsetTop;
+
+    let html = iframeView.querySelector("html")
+    let body = iframeView.body
+    let outer = document.getElementById("view-outer")
+
+    console.log("html.scrollTop: ",html.scrollTop)
+    console.log("body.scrollTop: ",body.scrollTop)
+
+    if(html.scrollTop){
+        html.scrollTop = targetTop - offset
+    }
+    if(body.scrollTop){
+        body.scrollTop = targetTop - offset
+    }
+    if(outer.scrollTop){
+        outer.scrollTop = targetTop - offset
+    }
 }
 //initial
 
