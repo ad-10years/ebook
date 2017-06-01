@@ -6,7 +6,7 @@ html, body, main {
   height: 100%;
   width: 100%;
   background-color: white;
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 .popMenu {
@@ -404,6 +404,7 @@ html, body, main {
     }
 
     &.menu-active {
+      //fix display on safari
       width: 300px;
     }
   }
