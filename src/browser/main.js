@@ -80,11 +80,7 @@ function gotoView($node,offset=150) {
     let targetTop = $node.offsetTop;
     let body = document.getElementById("view").contentDocument.body
     let outer = document.getElementById("view-outer")
-
-    console.log("body.scrollTop: ",body.scrollTop)
     console.log("outer.scrollTop: ",outer.scrollTop)
-    body.scrollTop = targetTop - offset
-    $(body).animate({scrollTop:targetTop - offset},1000)
     $(outer).animate({scrollTop:targetTop - offset},1000)
     // outer.scrollTop = targetTop - offset
 }

@@ -48,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/browser/main.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="316">
-              <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="8" />
+              <caret line="82" column="52" lean-forward="false" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#44#94#0" expanded="true" />
@@ -138,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.less" pinned="false" current-in-tab="true">
+      <file leaf-file-name="style.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/browser/style.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
-              <caret line="166" column="21" lean-forward="false" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
+            <state relative-caret-position="234">
+              <caret line="159" column="3" lean-forward="true" selection-start-line="159" selection-start-column="3" selection-end-line="159" selection-end-column="3" />
               <folding>
                 <element signature="e#353#2284#0" expanded="false" />
                 <element signature="e#735#1059#0" expanded="false" />
@@ -252,8 +252,8 @@
         <option value="$PROJECT_DIR$/docs/contents/起/十年一觉广告梦.html" />
         <option value="$PROJECT_DIR$/src/common/common-style.less" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
-        <option value="$PROJECT_DIR$/src/browser/main.js" />
         <option value="$PROJECT_DIR$/src/browser/style.less" />
+        <option value="$PROJECT_DIR$/src/browser/main.js" />
       </list>
     </option>
   </component>
@@ -665,12 +665,12 @@
       <workItem from="1496070911142" duration="8380000" />
       <workItem from="1496112435893" duration="10688000" />
       <workItem from="1496245672394" duration="2969000" />
-      <workItem from="1496306289565" duration="9545000" />
+      <workItem from="1496306289565" duration="9676000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66758000" />
+    <option name="totallyTimeSpent" value="66889000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2578" height="1060" extended-state="6" />
@@ -1037,26 +1037,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/browser/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="73" column="8" lean-forward="false" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="8" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#44#94#0" expanded="true" />
-            <element signature="n#!!block;n#hrefJumping#0" expanded="false" />
-            <element signature="n#!!block;n#innerPageJumping#0" expanded="false" />
-            <element signature="n#!!block;n#idEventDispatch#0" expanded="false" />
-            <element signature="n#!!block;n#getChapterTemplate#0" expanded="false" />
-            <element signature="n#!!block;n#menuSwitch#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/browser/style.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
-          <caret line="166" column="21" lean-forward="false" selection-start-line="166" selection-start-column="21" selection-end-line="166" selection-end-column="21" />
+        <state relative-caret-position="234">
+          <caret line="159" column="3" lean-forward="true" selection-start-line="159" selection-start-column="3" selection-end-line="159" selection-end-column="3" />
           <folding>
             <element signature="e#353#2284#0" expanded="false" />
             <element signature="e#735#1059#0" expanded="false" />
@@ -1071,6 +1055,22 @@
             <element signature="e#6624#8398#0" expanded="false" />
             <element signature="e#6907#8317#0" expanded="false" />
             <element signature="e#8497#8597#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/browser/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="82" column="52" lean-forward="false" selection-start-line="82" selection-start-column="52" selection-end-line="82" selection-end-column="52" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#44#94#0" expanded="true" />
+            <element signature="n#!!block;n#hrefJumping#0" expanded="false" />
+            <element signature="n#!!block;n#innerPageJumping#0" expanded="false" />
+            <element signature="n#!!block;n#idEventDispatch#0" expanded="false" />
+            <element signature="n#!!block;n#getChapterTemplate#0" expanded="false" />
+            <element signature="n#!!block;n#menuSwitch#0" expanded="false" />
           </folding>
         </state>
       </provider>
