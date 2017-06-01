@@ -183,22 +183,17 @@ function gotoView($node) {
     var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
 
 
-    var iframeView = document.getElementById("view");
     var targetTop = $node.offsetTop;
-
-    var html = iframeView.querySelector("html");
-    var body = iframeView.body;
+    var body = document.getElementById("view").body;
     var outer = document.getElementById("view-outer");
 
-    console.log("html.scrollTop: ", html.scrollTop);
     console.log("body.scrollTop: ", body.scrollTop);
+    console.log("outer.scrollTop: ", outer.scrollTop);
 
-    if (html.scrollTop) {
-        html.scrollTop = targetTop - offset;
-    }
     if (body.scrollTop) {
         body.scrollTop = targetTop - offset;
     }
+
     if (outer.scrollTop) {
         outer.scrollTop = targetTop - offset;
     }

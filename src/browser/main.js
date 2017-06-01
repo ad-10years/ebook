@@ -74,22 +74,17 @@ function iframeContentInitial() {
 }
 function gotoView($node,offset=150) {
 
-    let iframeView = document.getElementById("view")
     let targetTop = $node.offsetTop;
-
-    let html = iframeView.querySelector("html")
-    let body = iframeView.body
+    let body = document.getElementById("view").body
     let outer = document.getElementById("view-outer")
 
-    console.log("html.scrollTop: ",html.scrollTop)
     console.log("body.scrollTop: ",body.scrollTop)
+    console.log("outer.scrollTop: ",outer.scrollTop)
 
-    if(html.scrollTop){
-        html.scrollTop = targetTop - offset
-    }
     if(body.scrollTop){
         body.scrollTop = targetTop - offset
     }
+
     if(outer.scrollTop){
         outer.scrollTop = targetTop - offset
     }
