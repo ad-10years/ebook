@@ -14,7 +14,10 @@ let hg= {
             let screenHeight = 200
             let currentSection ;
             //评估
-            for(let $el of target.querySelectorAll("["+sectionAttr + "]")){
+            let queryResult = target.querySelectorAll("["+sectionAttr + "]")
+            for(let i in queryResult){
+                let $el = queryResult[i]
+
                 if(!($el.offsetTop - screenHeight < currentScroll)){
                     break
                 }

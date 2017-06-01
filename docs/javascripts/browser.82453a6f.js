@@ -313,34 +313,15 @@ var hg = {
             var screenHeight = 200;
             var currentSection = void 0;
             //评估
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
+            var queryResult = target.querySelectorAll("[" + sectionAttr + "]");
+            for (var i in queryResult) {
+                var $el = queryResult[i];
 
-            try {
-                for (var _iterator = target.querySelectorAll("[" + sectionAttr + "]")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var $el = _step.value;
-
-                    if (!($el.offsetTop - screenHeight < currentScroll)) {
-                        break;
-                    }
-                    currentSection = $el;
+                if (!($el.offsetTop - screenHeight < currentScroll)) {
+                    break;
                 }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
+                currentSection = $el;
             }
-
             if (!currentSection) {
                 return;
             }
@@ -349,26 +330,57 @@ var hg = {
                 console.log("cache here:", sectionID);
                 return;
             }
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
             try {
-                for (var _iterator2 = document.getElementsByTagName("iframe")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                    var iframe = _step2.value;
-                    var _iteratorNormalCompletion5 = true;
-                    var _didIteratorError5 = false;
-                    var _iteratorError5 = undefined;
+                for (var _iterator = document.getElementsByTagName("iframe")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var iframe = _step.value;
+                    var _iteratorNormalCompletion4 = true;
+                    var _didIteratorError4 = false;
+                    var _iteratorError4 = undefined;
 
                     try {
-                        for (var _iterator5 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-                            var $activedEl = _step5.value;
+                        for (var _iterator4 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                            var $activedEl = _step4.value;
 
 
                             if (typeof removeCallback === "function") {
                                 removeCallback($activedEl);
                             } else {
                                 $activedEl.classList.remove(activeClass);
+                            }
+                        }
+                    } catch (err) {
+                        _didIteratorError4 = true;
+                        _iteratorError4 = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                                _iterator4.return();
+                            }
+                        } finally {
+                            if (_didIteratorError4) {
+                                throw _iteratorError4;
+                            }
+                        }
+                    }
+
+                    var _iteratorNormalCompletion5 = true;
+                    var _didIteratorError5 = false;
+                    var _iteratorError5 = undefined;
+
+                    try {
+                        for (var _iterator5 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                            var $triggerEl = _step5.value;
+
+
+                            if (typeof addCallback === "function") {
+
+                                addCallback($triggerEl);
+                            } else {
+                                $triggerEl.classList.add(activeClass);
                             }
                         }
                     } catch (err) {
@@ -385,36 +397,35 @@ var hg = {
                             }
                         }
                     }
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
 
-                    var _iteratorNormalCompletion6 = true;
-                    var _didIteratorError6 = false;
-                    var _iteratorError6 = undefined;
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
 
-                    try {
-                        for (var _iterator6 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                            var $triggerEl = _step6.value;
+            try {
+                for (var _iterator2 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var _$activedEl = _step2.value;
 
 
-                            if (typeof addCallback === "function") {
-
-                                addCallback($triggerEl);
-                            } else {
-                                $triggerEl.classList.add(activeClass);
-                            }
-                        }
-                    } catch (err) {
-                        _didIteratorError6 = true;
-                        _iteratorError6 = err;
-                    } finally {
-                        try {
-                            if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                                _iterator6.return();
-                            }
-                        } finally {
-                            if (_didIteratorError6) {
-                                throw _iteratorError6;
-                            }
-                        }
+                    if (typeof removeCallback === "function") {
+                        removeCallback(_$activedEl);
+                    } else {
+                        _$activedEl.classList.remove(activeClass);
                     }
                 }
             } catch (err) {
@@ -437,14 +448,14 @@ var hg = {
             var _iteratorError3 = undefined;
 
             try {
-                for (var _iterator3 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-                    var _$activedEl = _step3.value;
+                for (var _iterator3 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                    var _$triggerEl = _step3.value;
 
 
-                    if (typeof removeCallback === "function") {
-                        removeCallback(_$activedEl);
+                    if (typeof addCallback === "function") {
+                        addCallback(_$triggerEl);
                     } else {
-                        _$activedEl.classList.remove(activeClass);
+                        _$triggerEl.classList.add(activeClass);
                     }
                 }
             } catch (err) {
@@ -458,36 +469,6 @@ var hg = {
                 } finally {
                     if (_didIteratorError3) {
                         throw _iteratorError3;
-                    }
-                }
-            }
-
-            var _iteratorNormalCompletion4 = true;
-            var _didIteratorError4 = false;
-            var _iteratorError4 = undefined;
-
-            try {
-                for (var _iterator4 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                    var _$triggerEl = _step4.value;
-
-
-                    if (typeof addCallback === "function") {
-                        addCallback(_$triggerEl);
-                    } else {
-                        _$triggerEl.classList.add(activeClass);
-                    }
-                }
-            } catch (err) {
-                _didIteratorError4 = true;
-                _iteratorError4 = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                        _iterator4.return();
-                    }
-                } finally {
-                    if (_didIteratorError4) {
-                        throw _iteratorError4;
                     }
                 }
             }

@@ -363,6 +363,9 @@ main {
   .popMenu div.content div.page.is-active div.content .links .links-inner li button:hover {
     border-bottom: grey 4px solid;
   }
+  .popMenu.menu-active {
+    width: 300px;
+  }
   #view-outer {
     width: calc(100% - 300px);
   }
