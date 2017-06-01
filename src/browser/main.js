@@ -80,14 +80,9 @@ function gotoView($node,offset=150) {
 
     console.log("body.scrollTop: ",body.scrollTop)
     console.log("outer.scrollTop: ",outer.scrollTop)
+    body.scrollTop = targetTop - offset
+    outer.scrollTop = targetTop - offset
 
-    if(body.scrollTop){
-        body.scrollTop = targetTop - offset
-    }
-
-    if(outer.scrollTop){
-        outer.scrollTop = targetTop - offset
-    }
 }
 //initial
 
