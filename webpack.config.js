@@ -31,7 +31,6 @@ module.exports = {
     },
     plugins:[
         new ExtractTextPlugin({ filename: './stylesheets/[name].[hash:8].css', disable: false, allChunks: true }),
-
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/index.html', //生成的html存放路径，相对于path
             template: __dirname + '/src/templates/index.html', //html模板路径

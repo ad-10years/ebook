@@ -3,6 +3,7 @@
  */
 import hightlight from  "../components/hightlight"
 import attrListener from "../components/AttrListener"
+
 //attr listneer
 let mainAttrListener = new attrListener()
 function anchorJumping(element,attrVal) {
@@ -81,8 +82,9 @@ function gotoView($node,offset=150) {
     console.log("body.scrollTop: ",body.scrollTop)
     console.log("outer.scrollTop: ",outer.scrollTop)
     body.scrollTop = targetTop - offset
-    outer.scrollTop = targetTop - offset
-
+    $(body).animate({scrollTop:targetTop - offset},1000)
+    $(outer).animate({scrollTop:targetTop - offset},1000)
+    // outer.scrollTop = targetTop - offset
 }
 //initial
 

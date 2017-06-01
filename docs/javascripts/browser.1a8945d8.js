@@ -190,7 +190,9 @@ function gotoView($node) {
     console.log("body.scrollTop: ", body.scrollTop);
     console.log("outer.scrollTop: ", outer.scrollTop);
     body.scrollTop = targetTop - offset;
-    outer.scrollTop = targetTop - offset;
+    $(body).animate({ scrollTop: targetTop - offset }, 1000);
+    $(outer).animate({ scrollTop: targetTop - offset }, 1000);
+    // outer.scrollTop = targetTop - offset
 }
 //initial
 
