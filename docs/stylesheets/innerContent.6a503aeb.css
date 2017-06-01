@@ -3,7 +3,7 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
 }
-header {
+header.article {
   height: 200px;
   width: 100%;
   background-color: black;
@@ -21,10 +21,10 @@ header {
   box-sizing: border-box;
   background-size: cover;
 }
-header .title {
+header.article .title {
   color: white;
 }
-header .sub-title {
+header.article .sub-title {
   color: white;
 }
 main {
@@ -90,7 +90,7 @@ button.big {
   background-color: transparent;
   color: black;
   margin: 1rem auto;
-  height: 2.5rem;
+  height: 3rem;
   transition: .5s;
   cursor: pointer ;
 }

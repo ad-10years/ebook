@@ -19,46 +19,25 @@
         background-size: cover;
         background-position: 50% 50%;
     }
-    html{
-        height: 100%;
-        width: 100%;
-    }
     body{
         display: flex;
-        height: 100%;
-        width: 100%;
         flex-direction: column;
         justify-content: center;
     }
     header{
+        margin-top: 30%;
         text-align: center;
         box-sizing: border-box;
         color: black;
         padding: 3rem 0;
         width: 100%;
-        background-color: rgba(255,255,255,0.5);
+        background-color: rgba(255,255,255,0.8);
     }
     *{
-        font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+        flex-shrink: 0;
     }
     main{
         text-align: center;
-    }
-     button.start{
-        background-color: transparent;
-        border: 2px black solid;
-        color: black;
-        width: 60%;
-        margin-top: 4rem;
-         margin-bottom: 1rem;
-        height: 2.5rem;
-        transition: .5s;
-        cursor: pointer ;
-    }
-     button.start:hover{
-        color: white;
-        border: 2px transparent solid;
-        background-color: black;
     }
 </style>
 <body>
@@ -71,7 +50,7 @@
         <span>十年一觉广告梦，赢得书生满载归</span>
 
     </div>
-    <button class="start" data-href="./contents/起/十年一觉广告梦.html">开始阅读</button>
+    <button class="big" data-href="./contents/起/十年一觉广告梦.html">开始阅读</button>
 </header>
 
 <div id="particles-js">
