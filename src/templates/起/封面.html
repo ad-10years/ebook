@@ -7,6 +7,7 @@
 </head>
 <link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet">
 <style>
+
     #particles-js {
         position: fixed;
         z-index: -1;
@@ -19,13 +20,7 @@
         background-size: cover;
         background-position: 50% 50%;
     }
-    body{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
     header{
-        margin-top: 30%;
         text-align: center;
         box-sizing: border-box;
         color: black;
@@ -33,28 +28,34 @@
         width: 100%;
         background-color: rgba(255,255,255,0.8);
     }
+    main{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 30rem;
+    }
     *{
         flex-shrink: 0;
     }
-    main{
-        text-align: center;
-    }
+
 </style>
 <body>
+<main>
+    <header>
+        <div class="title">
+            <h1>十年一觉广告梦</h1>
+        </div>
+        <div class="sub-title">
+            <span>十年一觉广告梦，赢得书生满载归</span>
 
-<header>
-    <div class="title">
-        <h1>十年一觉广告梦</h1>
-    </div>
-    <div class="sub-title">
-        <span>十年一觉广告梦，赢得书生满载归</span>
+        </div>
+        <button class="big" data-href="./contents/起/十年一觉广告梦.html">开始阅读</button>
+    </header>
+</main>
 
-    </div>
-    <button class="big" data-href="./contents/起/十年一觉广告梦.html">开始阅读</button>
-</header>
+<div id="particles-js"></div>
 
-<div id="particles-js">
-</div>
 </body>
 <script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
 

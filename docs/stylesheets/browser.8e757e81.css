@@ -356,13 +356,13 @@ main {
   }
   .popMenu div.content div.page.is-active div.content .links .links-inner li button.is-active {
     border-left: black 4px solid;
-    border-right: black 4px solid;
     background-color: whitesmoke;
     color: black;
     font-weight: 900;
   }
   .popMenu div.content div.page.is-active div.content .links .links-inner li button:hover {
-    border-bottom: grey 4px solid;
+    border-left: black 4px solid;
+    background-color: whitesmoke;
   }
   .popMenu.menu-active {
     width: 300px;

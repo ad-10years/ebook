@@ -72,15 +72,14 @@ function iframeContentInitial() {
 
     iDoc.contentDocument.body.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
     iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height
-    hightlight.listen(iDoc.contentDocument.body)
+    ///hightlight.listen(iDoc.contentDocument.body)
+    hightlight.listenEx({scrollBody:iDoc.contentDocument.body,scrollTarget:document.getElementById("view-outer")})
     document.getElementById("chapter-insert").innerHTML = getChapterTemplate()
 }
 function gotoView($node,offset=150) {
 
     let targetTop = $node.offsetTop;
-    let body = document.getElementById("view").contentDocument.body
     let outer = document.getElementById("view-outer")
-    console.log("outer.scrollTop: ",outer.scrollTop)
     $(outer).animate({scrollTop:targetTop - offset},1000)
     // outer.scrollTop = targetTop - offset
 }
