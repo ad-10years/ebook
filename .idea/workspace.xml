@@ -15,11 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2834">
-              <caret line="127" column="29" lean-forward="true" selection-start-line="127" selection-start-column="29" selection-end-line="127" selection-end-column="29" />
+            <state relative-caret-position="286">
+              <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -58,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/browser/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+            <state relative-caret-position="273">
+              <caret line="81" column="23" lean-forward="false" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#44#94#0" expanded="true" />
@@ -227,9 +227,9 @@
         <option value="$PROJECT_DIR$/src/common/common-style.less" />
         <option value="$PROJECT_DIR$/docs/stylesheets/common.css" />
         <option value="$PROJECT_DIR$/docs/contents/起/十年一觉广告梦.html" />
-        <option value="$PROJECT_DIR$/src/browser/main.js" />
         <option value="$PROJECT_DIR$/docs/index.html" />
         <option value="$PROJECT_DIR$/src/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/browser/main.js" />
       </list>
     </option>
   </component>
@@ -631,12 +631,12 @@
       <workItem from="1496070911142" duration="8380000" />
       <workItem from="1496112435893" duration="10688000" />
       <workItem from="1496245672394" duration="2969000" />
-      <workItem from="1496306289565" duration="5297000" />
+      <workItem from="1496306289565" duration="5431000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62510000" />
+    <option name="totallyTimeSpent" value="62644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2578" height="1060" extended-state="6" />
@@ -995,23 +995,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/browser/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#44#94#0" expanded="true" />
-            <element signature="n#!!block;n#hrefJumping#0" expanded="false" />
-            <element signature="n#!!block;n#innerPageJumping#0" expanded="false" />
-            <element signature="n#!!block;n#idEventDispatch#0" expanded="false" />
-            <element signature="n#!!block;n#getChapterTemplate#0" expanded="false" />
-            <element signature="n#!!block;n#menuSwitch#0" expanded="false" />
-            <element signature="n#!!block;n#iframeContentInitial#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
@@ -1022,9 +1005,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2834">
-          <caret line="127" column="29" lean-forward="true" selection-start-line="127" selection-start-column="29" selection-end-line="127" selection-end-column="29" />
+        <state relative-caret-position="286">
+          <caret line="29" column="30" lean-forward="true" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/browser/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="81" column="23" lean-forward="false" selection-start-line="81" selection-start-column="23" selection-end-line="81" selection-end-column="23" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#44#94#0" expanded="true" />
+            <element signature="n#!!block;n#hrefJumping#0" expanded="false" />
+            <element signature="n#!!block;n#innerPageJumping#0" expanded="false" />
+            <element signature="n#!!block;n#idEventDispatch#0" expanded="false" />
+            <element signature="n#!!block;n#getChapterTemplate#0" expanded="false" />
+            <element signature="n#!!block;n#menuSwitch#0" expanded="false" />
+            <element signature="n#!!block;n#iframeContentInitial#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

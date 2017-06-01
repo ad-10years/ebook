@@ -75,7 +75,7 @@ function iframeContentInitial() {
 function gotoView($node,offset=150) {
 
     let targetTop = $node.offsetTop;
-    let body = document.getElementById("view").body
+    let body = document.getElementById("view").contentDocument.body
     let outer = document.getElementById("view-outer")
 
     console.log("body.scrollTop: ",body.scrollTop)
