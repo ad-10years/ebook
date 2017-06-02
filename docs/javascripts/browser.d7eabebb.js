@@ -88,21 +88,10 @@ var _moduleLoaderStep2 = _interopRequireDefault(_moduleLoaderStep);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //attr listneer
-var mainAttrListener = new _AttrListener2.default();
+var mainAttrListener = new _AttrListener2.default(); /**
+                                                      * Created by Dogfish on 2017/5/22.
+                                                      */
 
-//{name:"normalize",link:"https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css",type:"css"},
-//{name:"materializeCss",link:"https://cdn.bootcss.com/materialize/0.98.2/css/materialize.min.css",type:"css"},
-//{name:"hamburgers",link:"https://cdn.bootcss.com/hamburgers/0.8.1/hamburgers.min.css",type:"css"},
-//{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"},
-//{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"},
-/**
- * Created by Dogfish on 2017/5/22.
- */
-(0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }], [{ name: "materializeJs", link: "https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js", type: "js" }]], moduleOnload, main);
-
-function moduleOnload(count, total, name, type, link) {
-    console.log(count + "/" + total + " loaded[" + name + "] type:" + type + " link:" + link);
-}
 
 function anchorJumping(element, attrVal) {
     //链接内部跳转
@@ -209,18 +198,29 @@ function gotoView($node) {
 }
 //initial
 
-function main() {
-    console.log("all rely lib loaded");
-    mainAttrListener.add("data-page", innerPageJumping);
-    mainAttrListener.add("data-href", hrefJumping);
-    mainAttrListener.add("data-anchor", anchorJumping);
-    mainAttrListener.add("id", idEventDispatch);
-    iframeContentInitial();
-    document.getElementById("view").onload = iframeContentInitial;
-    document.addEventListener("click", function (event) {
-        mainAttrListener.pushEvent(event.target);
-    });
-}
+(function loadingStart() {
+    //{name:"normalize",link:"https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css",type:"css"},
+    //{name:"materializeCss",link:"https://cdn.bootcss.com/materialize/0.98.2/css/materialize.min.css",type:"css"},
+    //{name:"hamburgers",link:"https://cdn.bootcss.com/hamburgers/0.8.1/hamburgers.min.css",type:"css"},
+    //{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"},
+    //{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"},
+    (0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }], [{ name: "materializeJs", link: "https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js", type: "js" }]], moduleOnload, main);
+    function moduleOnload(count, total, name, type, link) {
+        console.log(count + "/" + total + " loaded[" + name + "] type:" + type + " link:" + link);
+    }
+    function main() {
+        console.log("all rely lib loaded");
+        mainAttrListener.add("data-page", innerPageJumping);
+        mainAttrListener.add("data-href", hrefJumping);
+        mainAttrListener.add("data-anchor", anchorJumping);
+        mainAttrListener.add("id", idEventDispatch);
+        iframeContentInitial();
+        document.getElementById("view").onload = iframeContentInitial;
+        document.addEventListener("click", function (event) {
+            mainAttrListener.pushEvent(event.target);
+        });
+    }
+})();
 
 /***/ }),
 /* 1 */
