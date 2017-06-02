@@ -3,9 +3,26 @@
  */
 import hightlight from  "../components/hightlight"
 import attrListener from "../components/AttrListener"
+import modLoaderStep from "../components/moduleLoaderStep"
 
 //attr listneer
 let mainAttrListener = new attrListener()
+
+//{name:"normalize",link:"https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css",type:"css"},
+//{name:"materializeCss",link:"https://cdn.bootcss.com/materialize/0.98.2/css/materialize.min.css",type:"css"},
+//{name:"hamburgers",link:"https://cdn.bootcss.com/hamburgers/0.8.1/hamburgers.min.css",type:"css"},
+//{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"},
+//{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"},
+modLoaderStep([
+    [{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"}],
+    [{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"}]
+    ], moduleOnload, main
+)
+
+function moduleOnload(count,total,name,type,link) {
+    console.log(count+"/"+total+" loaded[" + name + "] type:"+ type +" link:"+link)
+}
+
 function anchorJumping(element,attrVal) {
     //链接内部跳转
     let iframeView = document.getElementById("view")
@@ -85,13 +102,14 @@ function gotoView($node,offset=150) {
 }
 //initial
 
-(function main() {
+function main() {
+    console.log("all rely lib loaded")
     mainAttrListener.add("data-page",innerPageJumping)
     mainAttrListener.add("data-href",hrefJumping )
     mainAttrListener.add("data-anchor",anchorJumping)
     mainAttrListener.add("id",idEventDispatch)
-
+    iframeContentInitial()
     document.getElementById("view").onload= iframeContentInitial
     document.addEventListener("click", (event)=>{mainAttrListener.pushEvent(event.target)})
 
-})()
+}

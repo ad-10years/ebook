@@ -81,13 +81,29 @@ var _AttrListener = __webpack_require__(5);
 
 var _AttrListener2 = _interopRequireDefault(_AttrListener);
 
+var _moduleLoaderStep = __webpack_require__(8);
+
+var _moduleLoaderStep2 = _interopRequireDefault(_moduleLoaderStep);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //attr listneer
+var mainAttrListener = new _AttrListener2.default();
+
+//{name:"normalize",link:"https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css",type:"css"},
+//{name:"materializeCss",link:"https://cdn.bootcss.com/materialize/0.98.2/css/materialize.min.css",type:"css"},
+//{name:"hamburgers",link:"https://cdn.bootcss.com/hamburgers/0.8.1/hamburgers.min.css",type:"css"},
+//{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"},
+//{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"},
 /**
  * Created by Dogfish on 2017/5/22.
  */
-var mainAttrListener = new _AttrListener2.default();
+(0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }], [{ name: "materializeJs", link: "https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js", type: "js" }]], moduleOnload, main);
+
+function moduleOnload(count, total, name, type, link) {
+    console.log(count + "/" + total + " loaded[" + name + "] type:" + type + " link:" + link);
+}
+
 function anchorJumping(element, attrVal) {
     //链接内部跳转
     var iframeView = document.getElementById("view");
@@ -178,7 +194,8 @@ function iframeContentInitial() {
         mainAttrListener.pushEvent(event.target);
     });
     iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height;
-    _hightlight2.default.listen(iDoc.contentDocument.body);
+    ///hightlight.listen(iDoc.contentDocument.body)
+    _hightlight2.default.listenEx({ scrollBody: iDoc.contentDocument.body, scrollTarget: document.getElementById("view-outer") });
     document.getElementById("chapter-insert").innerHTML = getChapterTemplate();
 }
 function gotoView($node) {
@@ -192,17 +209,18 @@ function gotoView($node) {
 }
 //initial
 
-(function main() {
+function main() {
+    console.log("all rely lib loaded");
     mainAttrListener.add("data-page", innerPageJumping);
     mainAttrListener.add("data-href", hrefJumping);
     mainAttrListener.add("data-anchor", anchorJumping);
     mainAttrListener.add("id", idEventDispatch);
-
+    iframeContentInitial();
     document.getElementById("view").onload = iframeContentInitial;
     document.addEventListener("click", function (event) {
         mainAttrListener.pushEvent(event.target);
     });
-})();
+}
 
 /***/ }),
 /* 1 */
@@ -236,7 +254,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-__webpack_require__(7);
+__webpack_require__(9);
 
 function attrListener() {
     this.attrList = {};
@@ -300,44 +318,34 @@ exports.default = attrListener;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-
-var _hg;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /**
  * Created by Dogfish on 2017/5/28.
  */
 
-var hg = (_hg = {
-    listen: function listen(_ref) {
-        var _ref$scroll = _ref.scroll,
-            _ref$scroll$body = _ref$scroll.body,
-            body = _ref$scroll$body === undefined ? document.body : _ref$scroll$body,
-            _ref$scroll$target = _ref$scroll.target,
-            target = _ref$scroll$target === undefined ? document.body : _ref$scroll$target,
-            _ref$callback = _ref.callback,
-            _ref$callback$remove = _ref$callback.remove,
-            remove = _ref$callback$remove === undefined ? function () {} : _ref$callback$remove,
-            _ref$callback$add = _ref$callback.add,
-            add = _ref$callback$add === undefined ? function () {} : _ref$callback$add,
-            _ref$attr = _ref.attr,
-            _ref$attr$trigger = _ref$attr.trigger,
-            trigger = _ref$attr$trigger === undefined ? "data-anchor" : _ref$attr$trigger,
-            _ref$attr$section = _ref$attr.section,
-            section = _ref$attr$section === undefined ? "data-anchor-trigger" : _ref$attr$section,
-            _ref$attr$active = _ref$attr.active,
-            active = _ref$attr$active === undefined ? "is-active" : _ref$attr$active;
+var hg = {
+    listenEx: function listenEx(_ref) {
+        var _ref$scrollBody = _ref.scrollBody,
+            scrollBody = _ref$scrollBody === undefined ? document.body : _ref$scrollBody,
+            _ref$scrollTarget = _ref.scrollTarget,
+            scrollTarget = _ref$scrollTarget === undefined ? scrollBody : _ref$scrollTarget,
+            removeCallback = _ref.removeCallback,
+            activeCallback = _ref.activeCallback,
+            _ref$triggerAttr = _ref.triggerAttr,
+            triggerAttr = _ref$triggerAttr === undefined ? "data-anchor" : _ref$triggerAttr,
+            _ref$sectionAttr = _ref.sectionAttr,
+            sectionAttr = _ref$sectionAttr === undefined ? "data-anchor-trigger" : _ref$sectionAttr,
+            _ref$activeClass = _ref.activeClass,
+            activeClass = _ref$activeClass === undefined ? "is-active" : _ref$activeClass;
 
 
         var lastedSectionID = void 0;
-        body.onscroll = function () {
-            var currentScroll = body.scrollTop;
+        scrollTarget.onscroll = function () {
+            var currentScroll = scrollTarget.scrollTop;
             //定位偏移
-            var locatedOffset = 200;
+            var locatedOffset = 150;
             var currentSection = void 0;
             //评估
-            var queryResult = body.querySelectorAll("[" + section + "]");
+            var queryResult = scrollBody.querySelectorAll("[" + sectionAttr + "]");
             for (var i in queryResult) {
                 var $el = queryResult[i];
                 if (!($el.offsetTop - locatedOffset < currentScroll)) {
@@ -350,7 +358,7 @@ var hg = (_hg = {
                 return;
             }
             //
-            var sectionID = currentSection.getAttribute(section);
+            var sectionID = currentSection.getAttribute(sectionAttr);
             //性能优化缓存
             if (sectionID === lastedSectionID) {
                 //console.log("cache here:", sectionID)
@@ -369,11 +377,11 @@ var hg = (_hg = {
                     var _iteratorError4 = undefined;
 
                     try {
-                        for (var _iterator4 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                        for (var _iterator4 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + triggerAttr + "]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
                             var $activedEl = _step4.value;
 
 
-                            if (typeof removeCallback === "function") {
+                            if (typeof removeCallback() === "function") {
                                 removeCallback($activedEl);
                             } else {
                                 $activedEl.classList.remove(activeClass);
@@ -403,9 +411,9 @@ var hg = (_hg = {
                             var $triggerEl = _step5.value;
 
 
-                            if (typeof addCallback === "function") {
+                            if (typeof activeCallback === "function") {
 
-                                addCallback($triggerEl);
+                                activeCallback($triggerEl);
                             } else {
                                 $triggerEl.classList.add(activeClass);
                             }
@@ -479,8 +487,8 @@ var hg = (_hg = {
                     var _$triggerEl = _step3.value;
 
 
-                    if (typeof addCallback === "function") {
-                        addCallback(_$triggerEl);
+                    if (typeof activeCallback === "function") {
+                        activeCallback(_$triggerEl);
                     } else {
                         _$triggerEl.classList.add(activeClass);
                     }
@@ -502,210 +510,350 @@ var hg = (_hg = {
 
             lastedSectionID = sectionID;
         };
-    }
+    },
 
-}, _defineProperty(_hg, "listen", function listen(target, removeCallback, addCallback, triggerAttr, sectionAttr, activeClass) {
-    if (!target) {
-        target = document.body;
-    }
-    if (!sectionAttr) {
-        sectionAttr = "data-anchor-trigger";
-    }
-    if (!triggerAttr) {
-        triggerAttr = "data-anchor";
-    }
-    if (!activeClass) {
-        activeClass = "is-active";
-    }
-    var lastedSectionID = void 0;
-    target.onscroll = function () {
-        var currentScroll = target.scrollTop;
-        var screenHeight = 200;
-        var currentSection = void 0;
-        //评估
-        var queryResult = target.querySelectorAll("[" + sectionAttr + "]");
-        for (var i in queryResult) {
-            var $el = queryResult[i];
+    listen: function listen(target, removeCallback, addCallback, triggerAttr, sectionAttr, activeClass) {
+        if (!target) {
+            target = document.body;
+        }
+        if (!sectionAttr) {
+            sectionAttr = "data-anchor-trigger";
+        }
+        if (!triggerAttr) {
+            triggerAttr = "data-anchor";
+        }
+        if (!activeClass) {
+            activeClass = "is-active";
+        }
+        var lastedSectionID = void 0;
+        target.onscroll = function () {
+            var currentScroll = target.scrollTop;
+            var screenHeight = 200;
+            var currentSection = void 0;
+            //评估
+            var queryResult = target.querySelectorAll("[" + sectionAttr + "]");
+            for (var i in queryResult) {
+                var $el = queryResult[i];
 
-            if (!($el.offsetTop - screenHeight < currentScroll)) {
-                break;
+                if (!($el.offsetTop - screenHeight < currentScroll)) {
+                    break;
+                }
+                currentSection = $el;
             }
-            currentSection = $el;
-        }
-        if (!currentSection) {
-            return;
-        }
-        var sectionID = currentSection.getAttribute(sectionAttr);
-        if (sectionID === lastedSectionID) {
-            console.log("cache here:", sectionID);
-            return;
-        }
-        var _iteratorNormalCompletion6 = true;
-        var _didIteratorError6 = false;
-        var _iteratorError6 = undefined;
+            if (!currentSection) {
+                return;
+            }
+            var sectionID = currentSection.getAttribute(sectionAttr);
+            if (sectionID === lastedSectionID) {
+                console.log("cache here:", sectionID);
+                return;
+            }
+            var _iteratorNormalCompletion6 = true;
+            var _didIteratorError6 = false;
+            var _iteratorError6 = undefined;
 
-        try {
-            for (var _iterator6 = document.getElementsByTagName("iframe")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-                var iframe = _step6.value;
-                var _iteratorNormalCompletion9 = true;
-                var _didIteratorError9 = false;
-                var _iteratorError9 = undefined;
+            try {
+                for (var _iterator6 = document.getElementsByTagName("iframe")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                    var iframe = _step6.value;
+                    var _iteratorNormalCompletion9 = true;
+                    var _didIteratorError9 = false;
+                    var _iteratorError9 = undefined;
 
-                try {
-                    for (var _iterator9 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
-                        var $activedEl = _step9.value;
-
-
-                        if (typeof removeCallback === "function") {
-                            removeCallback($activedEl);
-                        } else {
-                            $activedEl.classList.remove(activeClass);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError9 = true;
-                    _iteratorError9 = err;
-                } finally {
                     try {
-                        if (!_iteratorNormalCompletion9 && _iterator9.return) {
-                            _iterator9.return();
+                        for (var _iterator9 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                            var $activedEl = _step9.value;
+
+
+                            if (typeof removeCallback === "function") {
+                                removeCallback($activedEl);
+                            } else {
+                                $activedEl.classList.remove(activeClass);
+                            }
                         }
+                    } catch (err) {
+                        _didIteratorError9 = true;
+                        _iteratorError9 = err;
                     } finally {
-                        if (_didIteratorError9) {
-                            throw _iteratorError9;
+                        try {
+                            if (!_iteratorNormalCompletion9 && _iterator9.return) {
+                                _iterator9.return();
+                            }
+                        } finally {
+                            if (_didIteratorError9) {
+                                throw _iteratorError9;
+                            }
                         }
                     }
-                }
 
-                var _iteratorNormalCompletion10 = true;
-                var _didIteratorError10 = false;
-                var _iteratorError10 = undefined;
+                    var _iteratorNormalCompletion10 = true;
+                    var _didIteratorError10 = false;
+                    var _iteratorError10 = undefined;
 
-                try {
-                    for (var _iterator10 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-                        var $triggerEl = _step10.value;
-
-
-                        if (typeof addCallback === "function") {
-
-                            addCallback($triggerEl);
-                        } else {
-                            $triggerEl.classList.add(activeClass);
-                        }
-                    }
-                } catch (err) {
-                    _didIteratorError10 = true;
-                    _iteratorError10 = err;
-                } finally {
                     try {
-                        if (!_iteratorNormalCompletion10 && _iterator10.return) {
-                            _iterator10.return();
+                        for (var _iterator10 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                            var $triggerEl = _step10.value;
+
+
+                            if (typeof addCallback === "function") {
+
+                                addCallback($triggerEl);
+                            } else {
+                                $triggerEl.classList.add(activeClass);
+                            }
                         }
+                    } catch (err) {
+                        _didIteratorError10 = true;
+                        _iteratorError10 = err;
                     } finally {
-                        if (_didIteratorError10) {
-                            throw _iteratorError10;
+                        try {
+                            if (!_iteratorNormalCompletion10 && _iterator10.return) {
+                                _iterator10.return();
+                            }
+                        } finally {
+                            if (_didIteratorError10) {
+                                throw _iteratorError10;
+                            }
                         }
                     }
                 }
-            }
-        } catch (err) {
-            _didIteratorError6 = true;
-            _iteratorError6 = err;
-        } finally {
-            try {
-                if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                    _iterator6.return();
-                }
+            } catch (err) {
+                _didIteratorError6 = true;
+                _iteratorError6 = err;
             } finally {
-                if (_didIteratorError6) {
-                    throw _iteratorError6;
+                try {
+                    if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                        _iterator6.return();
+                    }
+                } finally {
+                    if (_didIteratorError6) {
+                        throw _iteratorError6;
+                    }
                 }
             }
-        }
 
-        var _iteratorNormalCompletion7 = true;
-        var _didIteratorError7 = false;
-        var _iteratorError7 = undefined;
+            var _iteratorNormalCompletion7 = true;
+            var _didIteratorError7 = false;
+            var _iteratorError7 = undefined;
 
-        try {
-            for (var _iterator7 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-                var _$activedEl2 = _step7.value;
-
-
-                if (typeof removeCallback === "function") {
-                    removeCallback(_$activedEl2);
-                } else {
-                    _$activedEl2.classList.remove(activeClass);
-                }
-            }
-        } catch (err) {
-            _didIteratorError7 = true;
-            _iteratorError7 = err;
-        } finally {
             try {
-                if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                    _iterator7.return();
+                for (var _iterator7 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                    var _$activedEl2 = _step7.value;
+
+
+                    if (typeof removeCallback === "function") {
+                        removeCallback(_$activedEl2);
+                    } else {
+                        _$activedEl2.classList.remove(activeClass);
+                    }
                 }
+            } catch (err) {
+                _didIteratorError7 = true;
+                _iteratorError7 = err;
             } finally {
-                if (_didIteratorError7) {
-                    throw _iteratorError7;
+                try {
+                    if (!_iteratorNormalCompletion7 && _iterator7.return) {
+                        _iterator7.return();
+                    }
+                } finally {
+                    if (_didIteratorError7) {
+                        throw _iteratorError7;
+                    }
                 }
             }
-        }
 
-        var _iteratorNormalCompletion8 = true;
-        var _didIteratorError8 = false;
-        var _iteratorError8 = undefined;
+            var _iteratorNormalCompletion8 = true;
+            var _didIteratorError8 = false;
+            var _iteratorError8 = undefined;
 
-        try {
-            for (var _iterator8 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
-                var _$triggerEl2 = _step8.value;
-
-
-                if (typeof addCallback === "function") {
-                    addCallback(_$triggerEl2);
-                } else {
-                    _$triggerEl2.classList.add(activeClass);
-                }
-            }
-        } catch (err) {
-            _didIteratorError8 = true;
-            _iteratorError8 = err;
-        } finally {
             try {
-                if (!_iteratorNormalCompletion8 && _iterator8.return) {
-                    _iterator8.return();
+                for (var _iterator8 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                    var _$triggerEl2 = _step8.value;
+
+
+                    if (typeof addCallback === "function") {
+                        addCallback(_$triggerEl2);
+                    } else {
+                        _$triggerEl2.classList.add(activeClass);
+                    }
                 }
+            } catch (err) {
+                _didIteratorError8 = true;
+                _iteratorError8 = err;
             } finally {
-                if (_didIteratorError8) {
-                    throw _iteratorError8;
+                try {
+                    if (!_iteratorNormalCompletion8 && _iterator8.return) {
+                        _iterator8.return();
+                    }
+                } finally {
+                    if (_didIteratorError8) {
+                        throw _iteratorError8;
+                    }
                 }
             }
+
+            lastedSectionID = sectionID;
+        };
+    },
+    goto: function goto($node, $screen, offset) {
+
+        var targetTop = $node.offsetTop;
+        var html = $screen.querySelector("html");
+        var body = $screen.body;
+
+        console.log("html.scrollTop: ", html.scrollTop);
+        console.log("body.scrollTop: ", body.scrollTop);
+
+        if (html.scrollTop) {
+            html.scrollTop = targetTop - offset;
         }
-
-        lastedSectionID = sectionID;
-    };
-}), _defineProperty(_hg, "goto", function goto($node, $screen, offset) {
-
-    var targetTop = $node.offsetTop;
-    var html = $screen.querySelector("html");
-    var body = $screen.body;
-
-    console.log("html.scrollTop: ", html.scrollTop);
-    console.log("body.scrollTop: ", body.scrollTop);
-
-    if (html.scrollTop) {
-        html.scrollTop = targetTop - offset;
+        if (body.scrollTop) {
+            body.scrollTop = targetTop - offset;
+        }
     }
-    if (body.scrollTop) {
-        body.scrollTop = targetTop - offset;
-    }
-}), _hg);
+};
 
 exports.default = hg;
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+/**
+ * Created by Dogfish on 2017/6/2.
+ */
+// [{link,callback,type,name}]
+// type : js css img
+
+function moduleLoader(linkList, onloadCallback) {
+    this.count = 0;
+    this.total = 0;
+    if (typeof onloadCallback === "function") {
+        this.onload = onloadCallback;
+    }
+    this.loadList(linkList);
+}
+
+moduleLoader.prototype.loadList = function (linkList) {
+    var that = this;
+    if ((typeof linkList === "undefined" ? "undefined" : _typeof(linkList)) !== "object") {
+        return;
+    }
+
+    for (var i in linkList) {
+        if (linkList[i].hasOwnProperty("link") && linkList[i].hasOwnProperty("type")) {
+            var type = linkList[i]["type"];
+            var link = linkList[i]["link"];
+            var name = linkList[i]["name"];
+            var callback = linkList[i]["callback"];
+            var append = void 0;
+            //附加执行
+            switch (type) {
+                case "js":
+                    append = document.createElement('script');
+                    append.src = linkList[i]["link"];
+                    break;
+                case "css":
+                    //todo css onload event dont work! try to fix
+                    this.total--;
+                    //
+                    append = document.createElement('link');
+                    append.setAttribute("rel", "stylesheet");
+                    append.setAttribute("link", link);
+                    break;
+                case "img":
+                    // untest functional
+                    append = document.createElement('img');
+                    append.src = linkList[i]["link"];
+
+                    break;
+            }
+            //设定回调
+            this.total++;
+            append.onload = _onloadWarpper(name, type, link, this.onload, callback);
+
+            document.body.appendChild(append);
+        }
+    }
+
+    function _onloadWarpper(name, type, link, onloadCallback, userCallback) {
+        return function () {
+
+            that.count++;
+
+            onloadCallback(that.count, that.total, name, type, link);
+            if (typeof userCallback === "function") {
+
+                userCallback(that.count, that.total, name, type, link);
+            }
+
+            if (that.count === that.total) {
+                that.complete();
+            }
+        };
+    }
+};
+
+moduleLoader.prototype.complete = function () {};
+
+moduleLoader.prototype.onload = function (count, total, name, type, link) {};
+
+exports.default = moduleLoader;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _moduleLoader = __webpack_require__(7);
+
+var _moduleLoader2 = _interopRequireDefault(_moduleLoader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function moduleLoaderStep(list, onload, complete) {
+    var current = -1;
+    nextCall();
+
+    function nextCall() {
+        current++;
+        console.log("--section loaded--");
+
+        if (list.length > current) {
+            loadModule(list[current]);
+        } else {
+            complete();
+            console.log("--section loaded end--");
+        }
+    }
+
+    function loadModule(list) {
+        var loader = new _moduleLoader2.default();
+        loader.complete = nextCall;
+        loader.onload = onload;
+        loader.loadList(list);
+    }
+} /**
+   * Created by Dogfish on 2017/6/2.
+   */
+exports.default = moduleLoaderStep;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

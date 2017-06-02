@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var CleanWebpackPlugin = require('clean-webpack-plugin'); //installed via npm
 
 // webpack.config.js
 module.exports = {
@@ -30,6 +31,7 @@ module.exports = {
         ]
     },
     plugins:[
+        new CleanWebpackPlugin(["javascripts","stylesheets"],{root:__dirname + "/docs",exclude:  ['vconsole.min.js']}),
         new ExtractTextPlugin({ filename: './stylesheets/[name].[hash:8].css', disable: false, allChunks: true }),
         //browser 外围框架
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
