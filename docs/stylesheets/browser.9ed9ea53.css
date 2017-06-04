@@ -282,7 +282,7 @@ main {
   .popMenu.menu-active {
     top: 0;
     visibility: visible;
-    height: 100%;
+    height: calc(100%-3rem);
     width: 100%;
     opacity: 1;
     background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);

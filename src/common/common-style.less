@@ -97,10 +97,10 @@ button.big{
   }
 }
 
-footer{
-  padding-top: 2rem;
-  width: 100%;
-  text-align: center;
+
+
+.hidden{
+  display:none ;
 }
 
 @media only screen and (max-device-width: 768px){
@@ -111,6 +111,15 @@ button.big{
   border-left: 2px transparent solid;
   border-right: 2px transparent solid;
 }
+  footer{
+    padding-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    button{
+      width: 100%;
+    }
+  }
 }
 
 @media only screen and (min-device-width: 768px){
@@ -118,6 +127,14 @@ button.big{
   width: 350px;
   border: 2px black solid;
 }
+  footer{
+    padding-top: 2rem;
+    width: 100%;
+    display: flex;
+    button.big{
+      width: 40%;
+    }
+  }
 }
 
 

@@ -94,10 +94,8 @@ button.big:hover {
   border: 2px transparent solid;
   background-color: black;
 }
-footer {
-  padding-top: 2rem;
-  width: 100%;
-  text-align: center;
+.hidden {
+  display: none ;
 }
 @media only screen and (max-device-width: 768px) {
   button.big {
@@ -107,11 +105,35 @@ footer {
     border-left: 2px transparent solid;
     border-right: 2px transparent solid;
   }
+  footer {
+    padding-top: 2rem;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  footer button {
+    width: 100%;
+  }
 }
 @media only screen and (min-device-width: 768px) {
   button.big {
     width: 350px;
     border: 2px black solid;
+  }
+  footer {
+    padding-top: 2rem;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  footer button.big {
+    width: 40%;
   }
 }
 *::-webkit-scrollbar {
