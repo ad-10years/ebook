@@ -3,7 +3,7 @@
  */
 function menuSwitch(status) {
     let menu = $(".popMenu");
-    let menuButton =  $("#menu .hamburger--collapse")
+    let menuButton =  $(".hamburger--collapse")
     if(status === true){
         menu.addClass("menu-active")
         menuButton.addClass("is-active")
@@ -15,6 +15,7 @@ function menuSwitch(status) {
         menuButton.toggleClass("is-active")
     }
 }
+
 function gotoView($node,offset=150) {
 
     let targetTop = $node.offsetTop;

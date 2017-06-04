@@ -121,6 +121,10 @@ button.big:hover {
   }
 }
 @media only screen and (min-device-width: 768px) {
+  main {
+    max-width: 60rem;
+    margin: 0 auto;
+  }
   button.big {
     width: 350px;
     border: 2px black solid;

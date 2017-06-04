@@ -419,7 +419,7 @@ Object.defineProperty(exports, "__esModule", {
  */
 function menuSwitch(status) {
     var menu = $(".popMenu");
-    var menuButton = $("#menu .hamburger--collapse");
+    var menuButton = $(".hamburger--collapse");
     if (status === true) {
         menu.addClass("menu-active");
         menuButton.addClass("is-active");
