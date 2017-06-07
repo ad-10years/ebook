@@ -158,9 +158,10 @@ main {
 .control-bar {
   height: 3rem;
   width: 100%;
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   border-top: 1px solid lightgrey;
-  z-index: 200;
+  z-index: 500;
 }
 .control-bar #\#menu {
   transition: .5s;
