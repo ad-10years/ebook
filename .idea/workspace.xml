@@ -61,7 +61,7 @@
         <entry file="file://$PROJECT_DIR$/docs/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="78">
-              <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -232,7 +232,6 @@
         <option value="$PROJECT_DIR$/src/browser/template.js" />
         <option value="$PROJECT_DIR$/src/components/autoBuffer.js" />
         <option value="$PROJECT_DIR$/src/browser/parallax-scroll.js" />
-        <option value="$PROJECT_DIR$/docs/index.html" />
         <option value="$PROJECT_DIR$/src/browser/main.js" />
         <option value="$PROJECT_DIR$/src/browser/iframe/iframe.js" />
         <option value="$PROJECT_DIR$/src/components/parallax-scroll/parallax-scroll.js" />
@@ -246,6 +245,7 @@
         <option value="$PROJECT_DIR$/src/templates/contents/承/周燕采访.html" />
         <option value="$PROJECT_DIR$/src/templates/contents/起/十年一觉广告梦.html" />
         <option value="$PROJECT_DIR$/src/templates/contents/contents.html" />
+        <option value="$PROJECT_DIR$/docs/index.html" />
       </list>
     </option>
   </component>
@@ -679,12 +679,12 @@
       <workItem from="1496539845301" duration="30306000" />
       <workItem from="1496628409983" duration="16032000" />
       <workItem from="1496721312685" duration="16554000" />
-      <workItem from="1496809728452" duration="477000" />
+      <workItem from="1496809728452" duration="869000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="163047000" />
+    <option name="totallyTimeSpent" value="163439000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2578" height="1060" extended-state="7" />
@@ -977,7 +977,7 @@
         <state relative-caret-position="780">
           <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <marker date="1496769133013" expanded="true" signature="1978:1995" ph="..." />
+            <marker date="1496810552917" expanded="true" signature="1801:1818" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1072,7 +1072,7 @@
     <entry file="file://$PROJECT_DIR$/docs/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
           <folding />
         </state>
       </provider>
