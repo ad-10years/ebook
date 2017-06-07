@@ -8,13 +8,10 @@ import template from  "./template"
 import pushAttrEvent from "./attrListen/listener"
 import attrLoader from "./attrLoader/attrLoader"
 
-//initial
-
 (function loadingStart() {
-    //引导
     modLoaderStep([
             [{name:"jquery",link:"https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js",type:"js"}],
-            [{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"}]
+            //[{name:"materializeJs",link:"https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js",type:"js"},]
         ], moduleOnload, main)
     function moduleOnload(count,total,name,type,link) {
         observe.emit("module-load",{count,total,name,type,link})
@@ -31,6 +28,7 @@ import attrLoader from "./attrLoader/attrLoader"
             document.getElementById("view").addEventListener("load", iframe.initial)
 
             document.addEventListener("click", (event)=>{pushAttrEvent.pushEvent(event.target)})
+
 
         })
 

@@ -9,14 +9,23 @@
 <body>
 <link href="../../stylesheets/common.css" rel="stylesheet">
 <style>
-    header{
+    .parallax-scroll.head-img{
         background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
         background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
         background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
+        background-size: cover;
+        height: 200px;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -2
+    }
+    main{
+        background-color: white;
     }
 </style>
 <header class="article">
-    <div class="mask"></div>
+    <div class="parallax-scroll head-img" parallax-speed="0.5"></div>
     <div class="title">
         <h1>多去涉猎知识，多去体验生活 </h1>
     </div>

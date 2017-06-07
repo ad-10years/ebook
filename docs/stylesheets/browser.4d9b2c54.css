@@ -148,6 +148,7 @@ main {
   height: 100%;
 }
 #view-outer #view {
+  overflow: hidden;
   border: none;
   min-width: 100%;
   width: .1rem;

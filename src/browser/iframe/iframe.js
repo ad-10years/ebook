@@ -5,6 +5,7 @@ import observe from "../observe"
 import hightlight from  "../../components/hightlight"
 import pushAttrEvent from "../attrListen/listener"
 
+import parallax from "../parallax-scroll"
 
 export default {
     initial() {
@@ -28,6 +29,7 @@ export default {
         document.getElementById("view-outer").scrollTop = 0;
         iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height
         //iframe初始化完成！
+        parallax.initial(document.getElementById("view").contentDocument.body,document.getElementById("view-outer"))
         observe.emit("iframe-load")
     },
 }

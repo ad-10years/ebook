@@ -11,7 +11,7 @@ export default {
         if(linkStatus && linkStatus.next){
             element.classList.remove("hidden")
             element.setAttribute("data-href",linkStatus.next.link)
-            element.innerHTML = "下一篇：" + linkStatus.next.name
+            element.innerHTML = "下一篇 -" + linkStatus.next.name
         }else{
             element.classList.add("hidden")
         }
@@ -24,7 +24,7 @@ export default {
         if(linkStatus && linkStatus.prev){
             element.classList.remove("hidden")
             element.setAttribute("data-href",linkStatus.prev.link)
-            element.innerHTML = "上一篇：" + linkStatus.prev.name
+            element.innerHTML = "上一篇 - " + linkStatus.prev.name
         }else{
             element.classList.add("hidden")
         }

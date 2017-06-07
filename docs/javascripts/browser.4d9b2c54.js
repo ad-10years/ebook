@@ -77,7 +77,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AttrListener = __webpack_require__(13);
+var _AttrListener = __webpack_require__(14);
 
 var _AttrListener2 = _interopRequireDefault(_AttrListener);
 
@@ -110,7 +110,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _observe = __webpack_require__(18);
+var _observe = __webpack_require__(20);
 
 var _observe2 = _interopRequireDefault(_observe);
 
@@ -139,11 +139,17 @@ var CHAPTER = 0;
 var CHILD_CHAPTER = 1;
 
 var bookListData = [{
-    name: "起·舞弄清影", type: CHAPTER,
+    name: "-", type: CHAPTER,
     link: ""
 }, {
-    name: "开始阅读", type: CHILD_CHAPTER,
+    name: "开始", type: CHILD_CHAPTER,
     link: "./contents/起/封面.html"
+}, {
+    name: "目录", type: CHILD_CHAPTER,
+    link: "./contents/contents.html"
+}, {
+    name: "起·舞弄清影", type: CHAPTER,
+    link: ""
 }, {
     name: "十年一觉广告梦", type: CHILD_CHAPTER,
     link: "./contents/起/十年一觉广告梦.html"
@@ -341,7 +347,7 @@ var _observe = __webpack_require__(1);
 
 var _observe2 = _interopRequireDefault(_observe);
 
-var _moduleLoaderStep = __webpack_require__(17);
+var _moduleLoaderStep = __webpack_require__(19);
 
 var _moduleLoaderStep2 = _interopRequireDefault(_moduleLoaderStep);
 
@@ -363,14 +369,11 @@ var _attrLoader2 = _interopRequireDefault(_attrLoader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//initial
-
 /**
  * Created by Dogfish on 2017/5/22.
  */
 (function loadingStart() {
-    //引导
-    (0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }], [{ name: "materializeJs", link: "https://cdn.bootcss.com/materialize/0.98.2/js/materialize.min.js", type: "js" }]], moduleOnload, main);
+    (0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }]], moduleOnload, main);
     function moduleOnload(count, total, name, type, link) {
         _observe2.default.emit("module-load", { count: count, total: total, name: name, type: type, link: link });
         console.log(count + "/" + total + " loaded[" + name + "] type:" + type + " link:" + link);
@@ -431,6 +434,7 @@ function menuSwitch(status) {
         menuButton.toggleClass("is-active");
     }
 }
+
 function gotoView($node) {
     var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
 
@@ -488,7 +492,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AttrLoader = __webpack_require__(14);
+var _AttrLoader = __webpack_require__(15);
 
 var _AttrLoader2 = _interopRequireDefault(_AttrLoader);
 
@@ -533,7 +537,7 @@ exports.default = {
         if (linkStatus && linkStatus.next) {
             element.classList.remove("hidden");
             element.setAttribute("data-href", linkStatus.next.link);
-            element.innerHTML = "下一篇：" + linkStatus.next.name;
+            element.innerHTML = "下一篇 -" + linkStatus.next.name;
         } else {
             element.classList.add("hidden");
         }
@@ -546,7 +550,7 @@ exports.default = {
         if (linkStatus && linkStatus.prev) {
             element.classList.remove("hidden");
             element.setAttribute("data-href", linkStatus.prev.link);
-            element.innerHTML = "上一篇：" + linkStatus.prev.name;
+            element.innerHTML = "上一篇 - " + linkStatus.prev.name;
         } else {
             element.classList.add("hidden");
         }
@@ -584,7 +588,7 @@ var _observe = __webpack_require__(1);
 
 var _observe2 = _interopRequireDefault(_observe);
 
-var _hightlight = __webpack_require__(15);
+var _hightlight = __webpack_require__(17);
 
 var _hightlight2 = _interopRequireDefault(_hightlight);
 
@@ -592,8 +596,15 @@ var _listener = __webpack_require__(0);
 
 var _listener2 = _interopRequireDefault(_listener);
 
+var _parallaxScroll = __webpack_require__(12);
+
+var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/**
+ * Created by Dogfish on 2017/6/4.
+ */
 exports.default = {
     initial: function initial() {
         //attr tracker
@@ -640,15 +651,36 @@ exports.default = {
         document.getElementById("view-outer").scrollTop = 0;
         iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height;
         //iframe初始化完成！
+        _parallaxScroll2.default.initial(document.getElementById("view").contentDocument.body, document.getElementById("view-outer"));
         _observe2.default.emit("iframe-load");
     }
-}; /**
-    * Created by Dogfish on 2017/6/4.
-    */
+};
 
 /***/ }),
-/* 12 */,
-/* 13 */
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _parallaxScroll = __webpack_require__(21);
+
+var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var newParallaxScroll = new _parallaxScroll2.default(); /**
+                                                         * Created by Dogfish on 2017/6/6.
+                                                         */
+exports.default = newParallaxScroll;
+
+/***/ }),
+/* 13 */,
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -713,7 +745,7 @@ attrListener.prototype.remove = function (attr, callback) {
 exports.default = attrListener;
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -847,7 +879,103 @@ attrLoader.prototype.remove = function (attr, callback) {
 exports.default = attrLoader;
 
 /***/ }),
-/* 15 */
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
+                                                                                                                                                                                                                                                                               * Created by Dogfish on 2017/4/17.
+                                                                                                                                                                                                                                                                               */
+
+var _redo = __webpack_require__(22);
+
+var _redo2 = _interopRequireDefault(_redo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var compare = function compare(CHECK_DATA, ORIGINAL_DATA) {
+
+    var result = true;
+
+    compareFN(CHECK_DATA, ORIGINAL_DATA);
+    compareFN(ORIGINAL_DATA, CHECK_DATA);
+    function compareFN(CHECK_DATA, ORIGINAL_DATA) {
+
+        for (var key in CHECK_DATA) {
+            if (_typeof(CHECK_DATA[key]) === "object") {
+
+                if (ORIGINAL_DATA.hasOwnProperty(key)) {
+                    compareFN(CHECK_DATA[key], ORIGINAL_DATA[key]);
+                } else {
+                    result = false;
+                    return;
+                }
+            } else {
+                if (ORIGINAL_DATA.hasOwnProperty(key)) {
+
+                    if (ORIGINAL_DATA[key] !== CHECK_DATA[key]) {
+                        result = false;
+                        return;
+                    }
+                } else {
+                    result = false;
+                    return;
+                }
+            }
+        }
+    }
+
+    return result;
+};
+
+function autoBuffer(_ref, that) {
+    var interval = _ref.interval,
+        callback = _ref.callback;
+
+    this.interval = interval ? interval : 40;
+    this._callback = callback ? callback : function () {};
+    this._needUpdate = false;
+    this._store = {};
+    this._retry = new _redo2.default();
+    var _this = this;
+    if (!that) {
+        that = this;
+    }
+    this._autoBufferFN = function () {
+        if (_this._needUpdate) {
+            _this._callback.call(that, _this._store);
+            _this._needUpdate = false;
+        }
+    };
+}
+
+autoBuffer.prototype.startBuffer = function () {
+    this._retry.retryTime = this.interval;
+    this._retry.start(this._autoBufferFN);
+};
+
+autoBuffer.prototype.updateBuffer = function (newData) {
+    if (!compare(newData, this._store)) {
+        this._needUpdate = true;
+        this._store = newData;
+    }
+};
+
+autoBuffer.prototype.stopBuffer = function () {
+    this._needUpdate = false;
+    this._retry.end();
+};
+
+exports.default = autoBuffer;
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1253,7 +1381,7 @@ var hg = {
 exports.default = hg;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1347,7 +1475,7 @@ moduleLoader.prototype.onload = function (count, total, name, type, link) {};
 exports.default = moduleLoader;
 
 /***/ }),
-/* 17 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1357,7 +1485,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _moduleLoader = __webpack_require__(16);
+var _moduleLoader = __webpack_require__(18);
 
 var _moduleLoader2 = _interopRequireDefault(_moduleLoader);
 
@@ -1391,7 +1519,7 @@ function moduleLoaderStep(list, onload, complete) {
 exports.default = moduleLoaderStep;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1517,6 +1645,220 @@ observe.prototype.emitByStep = function (event, arg) {
 };
 
 exports.default = observe;
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _autoBuffer = __webpack_require__(16);
+
+var _autoBuffer2 = _interopRequireDefault(_autoBuffer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Dogfish on 2017/6/6.
+ */
+
+__webpack_require__(23);
+
+
+var proptyList = ["parallax-speed", "parallax-zIndex"];
+
+function parallax() {
+    // this.elementList =[{element:$element,params:{speed,z-index...ect}}]
+    this.elementList = undefined;
+    this.listenTarget = document.body;
+    this.buffer = new _autoBuffer2.default({ interval: 17, callback: this.onScroll }, this);
+}
+
+parallax.prototype.update = function () {
+    var $document = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+
+    var nodeList = $document.querySelectorAll(".parallax-scroll");
+    this.elementList = [];
+
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+        for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var element = _step.value;
+
+
+            var paramsList = {};
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = proptyList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var propName = _step2.value;
+
+                    paramsList[propName] = element.getAttribute(propName);
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
+                    }
+                }
+            }
+
+            this.elementList.push({ element: element, params: paramsList });
+        }
+    } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+                _iterator.return();
+            }
+        } finally {
+            if (_didIteratorError) {
+                throw _iteratorError;
+            }
+        }
+    }
+};
+
+parallax.prototype.initial = function () {
+    var $document = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : document;
+    var $scrollTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.body;
+
+    var that = this;
+    this.listenTarget = $scrollTarget;
+    this.lastScrollTop = 0;
+    this.update($document);
+    $scrollTarget.removeEventListener("scroll", onScroll);
+    $scrollTarget.addEventListener("scroll", onScroll);
+    that.buffer.startBuffer();
+
+    function onScroll() {
+        that.buffer.updateBuffer({ scrollTop: this.scrollTop });
+    }
+};
+
+parallax.prototype.onScroll = function (_ref) {
+    var scrollTop = _ref.scrollTop;
+
+
+    var movedDistance = scrollTop - this.lastScrollTop;
+
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+        for (var _iterator3 = this.elementList[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            var preset = _step3.value;
+
+            preset.element.style.top = (Number(preset.element.style.top.slice(0, -2)) + Number(preset.params["parallax-speed"]) * movedDistance).toFixed(2) + "px";
+            console.log(Number(preset.params["parallax-speed"]) * movedDistance);
+        }
+    } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+    } finally {
+        try {
+            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                _iterator3.return();
+            }
+        } finally {
+            if (_didIteratorError3) {
+                throw _iteratorError3;
+            }
+        }
+    }
+
+    this.lastScrollTop = scrollTop;
+};
+
+exports.default = parallax;
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+/**
+ * Created by Dogfish on 2017/4/17.
+ */
+function redo() {
+    this.callFunction = undefined;
+    this.timerID = undefined;
+    this.retryTime = 3000;
+    this.enable = false;
+    this.retryTimes = 0;
+}
+redo.prototype.start = function (callFunction, replace) {
+    if (typeof callFunction !== "function") {
+        return;
+    }
+    if (typeof replace !== "boolean") {
+        replace = false;
+    }
+    if (!replace && this.callFunction === callFunction) {
+        return;
+    }
+    //清除原有的
+    window.clearTimeout(this.timerID);
+    this.callFunction = callFunction;
+    this.timerID = undefined;
+    this.enable = true;
+    this.runner();
+};
+redo.prototype.runner = function () {
+    var that = this;
+    var runnerFN = function runnerFN() {
+        if (that.enable) {
+            that.retryTimes++;
+            that.callFunction();
+            that.runner();
+        }
+    };
+    that.timerID = window.setTimeout(runnerFN, that.retryTime);
+};
+redo.prototype.end = function (callFunction) {
+    if (callFunction !== this.callFunction) {
+        return;
+    }
+    window.clearTimeout(this.timerID);
+    this.callFunction = undefined;
+    this.timerID = undefined;
+    this.retryTimes = 0;
+
+    this.enable = false;
+};
+
+exports.default = redo;
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

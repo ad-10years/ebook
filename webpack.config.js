@@ -53,7 +53,7 @@ module.exports = {
         ///////////////// 起舞弄清影 /////////////////////////
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/起/十年一觉广告梦.html',
-            template: __dirname + '/src/templates/起/十年一觉广告梦.html',
+            template: __dirname + '/src/templates/contents/起/十年一觉广告梦.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],
@@ -64,18 +64,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/起/封面.html',
-            template: __dirname + '/src/templates/起/封面.html',
-            inject:  'body',
-            hash: true,
-            chunks: ['innerContent'],
-            minify: { //压缩HTML文件
-                removeComments: true,
-                collapseWhitespace: false
-            }
-        }),
-        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            filename: __dirname + '/docs/contents/起/目录.html',
-            template: __dirname + '/src/templates/起/目录.html',
+            template: __dirname + '/src/templates/contents/起/封面.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],
@@ -88,7 +77,7 @@ module.exports = {
         ///////////////// 承 /////////////////////////
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/承/沈伟采访.html',
-            template: __dirname + '/src/templates/承/沈伟采访.html',
+            template: __dirname + '/src/templates/contents/承/沈伟采访.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],
@@ -99,7 +88,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/承/周燕采访.html',
-            template: __dirname + '/src/templates/承/周燕采访.html',
+            template: __dirname + '/src/templates/contents/承/周燕采访.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],
@@ -110,7 +99,18 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/承/钟旭采访.html',
-            template: __dirname + '/src/templates/承/钟旭采访.html',
+            template: __dirname + '/src/templates/contents/承/钟旭采访.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/contents.html',
+            template: __dirname + '/src/templates/contents/contents.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],

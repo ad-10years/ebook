@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet">
+
+
+<style>
+    .parallax-scroll.head-img{
+        background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
+        background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
+        background-size: cover;
+        height: 200px;
+        width: 100%;
+        z-index: -2
+    }
+    .chapter{
+        height: 200px;
+    }
+    .chapter img{
+        position: absolute;
+        width: 100%;
+        height: 200px;
+    }
+    .chapter .intro{
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+        height: 50px;
+    }
+    .chapter .entry{
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+        height: 50px;
+    }
+</style>
+
+<header class="article">
+    <div class="parallax-scroll head-img" parallax-speed="0.5"></div>
+    <div class="title">
+        <h1> 目录导航</h1>
+    </div>
+</header>
+
+<body>
+<main>
+    <div class="chapter">
+        <img src="../../assets/image/0001-header.jpg" >
+
+        <p class="intro">hahahahah introdution</p>
+        <button class="entry">阅读</button>
+
+
+    </div>
+</main>
+
+</body>
+</html>

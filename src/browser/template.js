@@ -8,11 +8,19 @@ const CHILD_CHAPTER = 1;
 
 const bookListData = [
     {
-        name: "起·舞弄清影",type:CHAPTER,
+        name: "-",type:CHAPTER,
         link: "",
     }, {
-        name: "开始阅读",type:CHILD_CHAPTER,
+        name: "开始",type:CHILD_CHAPTER,
         link: "./contents/起/封面.html",
+    },{
+        name: "目录",type:CHILD_CHAPTER,
+        link: "./contents/contents.html",
+    },
+
+    {
+        name: "起·舞弄清影",type:CHAPTER,
+        link: "",
     }, {
         name: "十年一觉广告梦",type:CHILD_CHAPTER,
         link: "./contents/起/十年一觉广告梦.html",
