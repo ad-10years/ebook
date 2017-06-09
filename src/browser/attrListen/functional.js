@@ -1,6 +1,8 @@
 /**
  * Created by Dogfish on 2017/6/4.
  */
+import template from "../template";
+import nodeTracker from "../../components/DOMtracker"
 function menuSwitch(status) {
     let menu = $(".popMenu");
     let menuButton =  $(".hamburger--collapse")
@@ -25,32 +27,55 @@ function gotoView($node,offset=150) {
 }
 
 export default {
-    anchorJumping(element,attrVal) {
+    anchorJumping({element,attrVal}) {
         //链接内部跳转
         let iframeView = document.getElementById("view")
         let anchorElement = iframeView.contentDocument.getElementById(attrVal)
         gotoView(anchorElement)
         menuSwitch(false)
     },
-    hrefJumping(element,attrVal) {
+    hrefJumping({element,attrVal}) {
         //链接内部跳转
         $("[data-href]").removeClass("is-active")
         $(`[data-href="${attrVal}"]`).addClass("is-active")
         document.getElementById("view").src = attrVal
         menuSwitch(false)
+
+
+
     },
-    innerPageJumping(eventTarget,attrVal) {
+    innerPageJumping({eventTarget,attrVal}) {
         $(".page").removeClass("is-active")
         $("[data-page-target="+ attrVal+"]").addClass("is-active")
 
         $(".title-selector").removeClass("is-active")
         eventTarget.classList.add("is-active")
         menuSwitch(true)
+
+        //特殊页面的处理
+        switch (attrVal){
+            case "chapter-list":
+                let node = nodeTracker.getNodeByAttr("class",document.querySelector("[data-append=all-chapter] button.is-active"),"chapter-wrapper")
+                if(node){
+                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop
+                }
+                break
+            default:
+                break
+        }
     },
-    idEventDispatch(eventTarget,id) {
-        switch (id){
+    loadHrefTitle({eventTarget,attrVal}){
+        let content = template.query(attrVal,"link")
+        document.getElementById("chapter-child-title").innerText = content.current.name
+        document.getElementById("chapter-title").innerText = content.parent.name
+    },
+    idEventDispatch({eventTarget,attrVal}) {
+        switch (attrVal){
             case "#menu":
                 menuSwitch()
+                if($(".popMenu").hasClass("menu-active")){
+                    document.body.querySelector('[data-page=chapter-content]').click()
+                }
                 break;
             case "":
                 break

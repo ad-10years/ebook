@@ -1,3 +1,19 @@
+* {
+  font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+.col.s12 {
+  padding-top: .5rem;
+}
 html,
 body,
 main {
@@ -162,6 +178,8 @@ main {
   bottom: 0;
   border-top: 1px solid lightgrey;
   z-index: 500;
+  box-sizing: border-box;
+  padding: .5rem;
 }
 .control-bar #\#menu {
   transition: .5s;
@@ -372,10 +390,4 @@ main {
   .control-bar {
     display: none;
   }
-}
-* {
-  font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-}
-*::-webkit-scrollbar {
-  display: none;
 }

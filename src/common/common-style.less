@@ -180,6 +180,54 @@ button.big{
   }
 }
 
+.card{
+  height: 250px;
+
+
+
+  img{
+    width: 100%;
+  }
+  .intro{
+    color: white;
+    height: 8rem;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    opacity: .99;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .title{
+      color: black;
+      text-align: center;
+      margin: 0;
+      font-size: 1rem;
+      border-bottom: thin lightgray solid;
+    }
+    button.link{
+      background-color: whitesmoke;
+      color: grey;
+      border: none;
+      width: 100%;
+      height: 3rem;
+      transition: .5s;
+      cursor: pointer;
+
+      &:hover{
+        background-color: grey;
+        color: white;
+      }
+    }
+
+    p.text{
+      color: grey;
+      margin: 0;
+      padding: 1rem;
+    }
+
+  }
+}
 
 
 .hidden{
@@ -187,7 +235,7 @@ button.big{
 }
 
 @media only screen and (max-device-width: 768px){
-button.big{
+  button.big{
   width: 100%;
   display: block;
   border: 1px lightgrey solid;
@@ -203,14 +251,17 @@ button.big{
       width: 100%;
     }
   }
+
+  .card{
+    .intro{
+      min-width: 100%;
+      margin: 0;
+      width: 100%;
+    }
+  }
 }
 
 @media only screen and (min-device-width: 768px){
-  main{
-    max-width: 60rem;
-    margin: 0 auto;
-  }
-
   button.big{
     width: 350px;
     border: 2px black solid;
@@ -221,6 +272,14 @@ button.big{
     display: flex;
     button.big{
       width: 40%;
+    }
+  }
+
+  .card{
+    .intro{
+      width: 60%;
+      min-width: 20rem;
+      margin: -6.25% auto 0;
     }
   }
 }

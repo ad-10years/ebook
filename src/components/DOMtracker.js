@@ -2,13 +2,13 @@
  * Created by Dogfish on 2017/4/23.
  */
 export default {
-    getNodeByAttr:(attr,sourceElement)=>{
+    getNodeByAttr:(attr,sourceElement,value)=>{
         if (typeof sourceElement === "string") {
             sourceElement = document.getElementById(sourceElement)
         }
 
         let attrVal = sourceElement.getAttribute(attr)
-        if (attrVal) {
+        if (attrVal && (typeof value === "undefined" || value === attrVal)) {
             return sourceElement
         }
 
@@ -18,7 +18,7 @@ export default {
                 return
             }
             attrVal = sourceElement.getAttribute(attr);
-        } while (attrVal === null)
+        } while (attrVal ===null || !(typeof value === "undefined" || value === attrVal))
 
         return sourceElement
     },

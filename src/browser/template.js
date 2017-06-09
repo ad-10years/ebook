@@ -63,7 +63,7 @@ const bookListData = [
     }
 ]
 const buttonTemplate = `<li><button data-href="%LINK%">%NAME%</button></li>`;
-const wrapperTemplate = `<div>
+const wrapperTemplate = `<div class="chapter-wrapper">
                         <div class="col s12 mainText">
                             <h1>%TITLE%</h1>
                         </div>
@@ -125,11 +125,14 @@ export default {
         }
 
     },
-    query(name) {
-        let next,prev;
+    query(key,type="name"){
+        let next,prev,parent;
         for(let i=0;i<bookListData.length;i++){
             let chapter = bookListData[i]
-            if(chapter.name === name){
+            if(chapter.type === CHAPTER){
+                parent = chapter
+            }
+            if(chapter[type] === key){
 
                 if(bookListData.length >1 && i !== bookListData.length-1){
                     for(let j=i+1;j<bookListData.length;j++){
@@ -151,10 +154,10 @@ export default {
                         }
                     }
                 }
-                return {current:chapter,next,prev}
+                return {current:chapter,next,prev,parent}
             }
         }
 
-    }
+    },
 }
 

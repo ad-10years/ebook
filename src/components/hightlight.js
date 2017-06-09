@@ -39,8 +39,8 @@ let hg = {
                 return
             }
             //
-            for (let iframe of document.getElementsByTagName("iframe")) {
-                for (let $activedEl of iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + triggerAttr + "]")) {
+            for (let iframe of Array.prototype.slice.call(document.getElementsByTagName("iframe"))) {
+                for (let $activedEl of Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + triggerAttr + "]"))) {
 
                     if (typeof removeCallback() === "function") {
                         removeCallback($activedEl)
@@ -48,7 +48,7 @@ let hg = {
                         $activedEl.classList.remove(activeClass)
                     }
                 }
-                for (let $triggerEl of iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")) {
+                for (let $triggerEl of Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))) {
 
                     if (typeof activeCallback === "function") {
 
@@ -59,7 +59,7 @@ let hg = {
                 }
             }
 
-            for (let $activedEl of document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")) {
+            for (let $activedEl of Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))) {
 
 
                 if (typeof removeCallback === "function") {
@@ -69,7 +69,7 @@ let hg = {
                 }
             }
 
-            for (let $triggerEl of document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")) {
+            for (let $triggerEl of Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))) {
 
                 if (typeof activeCallback === "function") {
                     activeCallback($triggerEl)
@@ -117,8 +117,8 @@ let hg = {
                 console.log("cache here:", sectionID)
                 return
             }
-            for (let iframe of document.getElementsByTagName("iframe")) {
-                for (let $activedEl of iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")) {
+            for (let iframe of Array.prototype.slice.call(document.getElementsByTagName("iframe"))) {
+                for (let $activedEl of Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))) {
 
                     if (typeof removeCallback === "function") {
                         removeCallback($activedEl)
@@ -126,7 +126,7 @@ let hg = {
                         $activedEl.classList.remove(activeClass)
                     }
                 }
-                for (let $triggerEl of iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")) {
+                for (let $triggerEl of Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))) {
 
                     if (typeof addCallback === "function") {
 
@@ -137,7 +137,7 @@ let hg = {
                 }
             }
 
-            for (let $activedEl of document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")) {
+            for (let $activedEl of Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))) {
 
 
                 if (typeof removeCallback === "function") {
@@ -147,7 +147,7 @@ let hg = {
                 }
             }
 
-            for (let $triggerEl of document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")) {
+            for (let $triggerEl of Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))) {
 
                 if (typeof addCallback === "function") {
                     addCallback($triggerEl)

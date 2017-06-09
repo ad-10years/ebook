@@ -14,7 +14,7 @@ attrLoader.prototype.exec = function () {
             let valCallback = this.attrList[attr][i];
             if(typeof valCallback.callback !== "function"){continue}
 
-            for (let iframe of document.getElementsByTagName("iframe")) {
+            for (let iframe of Array.prototype.slice.call(document.getElementsByTagName("iframe"))) {
                 let queryString = valCallback.val? "["+attr+"='"+valCallback.val + "']" : "["+attr+"]";
                 let nodeList = iframe.contentDocument.querySelectorAll(queryString)
                 for(let element of Array.prototype.slice.call(nodeList)){

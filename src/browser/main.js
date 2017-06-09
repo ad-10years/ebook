@@ -7,6 +7,7 @@ import iframe from "./iframe/iframe"
 import template from  "./template"
 import pushAttrEvent from "./attrListen/listener"
 import attrLoader from "./attrLoader/attrLoader"
+import attrListenCallback from "./attrListen/functional"
 
 (function loadingStart() {
     modLoaderStep([
@@ -19,21 +20,30 @@ import attrLoader from "./attrLoader/attrLoader"
     }
     function main() {
 
-        observe.on("initial",()=>{
+        observe.on("initial",initial)
+
+        observe.on("iframe-load",()=>{attrLoader.exec()});
+
+        observe.on("data-href",attrListenCallback.hrefJumping)
+        observe.on("data-href",attrListenCallback.loadHrefTitle)
+
+        observe.on("data-page",attrListenCallback.innerPageJumping)
+        observe.on("data-anchor",attrListenCallback.anchorJumping)
+        observe.on("data-id",attrListenCallback.idEventDispatch)
+
+        observe.emit("initial")
+    }
+
+    function initial() {
 
             document.querySelector("[data-append=all-chapter]").innerHTML = template.get()
             document.querySelector("[data-append=all-chapter] button").classList.add("is-active")
-
             iframe.initial();
             document.getElementById("view").addEventListener("load", iframe.initial)
-
             document.addEventListener("click", (event)=>{pushAttrEvent.pushEvent(event.target)})
 
-
-        })
-
-        observe.on("iframe-load",()=>{attrLoader.exec()});
-        observe.emit("initial")
     }
 })()
+
+
 

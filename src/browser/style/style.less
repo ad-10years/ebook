@@ -2,6 +2,24 @@
 @fixBtnRight: 5px;
 @controlBarHeight:3rem;
 
+*{
+  font-family:  'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+ul{
+  list-style-type:none;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+}
+.col.s12{
+  padding-top: .5rem;
+}
 html, body, main {
   height: 100%;
   width: 100%;
@@ -174,6 +192,8 @@ html, body, main {
   bottom: 0;
   border-top:1px solid lightgrey;
   z-index: 500;
+  box-sizing: border-box;
+  padding: .5rem;
   #\#menu {
     transition: .5s;
     transition-timing-function: cubic-bezier(0.78, 0.05, 0.35, 0.99);
@@ -418,10 +438,3 @@ html, body, main {
 
 }
 
-*{
-  font-family:  'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}

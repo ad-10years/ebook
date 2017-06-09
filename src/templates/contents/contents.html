@@ -4,38 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet">
+<!--link href="https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css" rel="stylesheet"-->
 
 
 <style>
     .parallax-scroll.head-img{
-        background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
-        background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../../assets/image/0001-header.jpg');
+        background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
+        background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
         background-size: cover;
         height: 200px;
         width: 100%;
-        z-index: -2
+        z-index: -2;
+        left:0
     }
-    .chapter{
-        height: 200px;
-    }
-    .chapter img{
-        position: absolute;
-        width: 100%;
-        height: 200px;
-    }
-    .chapter .intro{
-        background-color: rgba(0,0,0,0.5);
-        color: white;
-        text-align: center;
-        height: 50px;
-    }
-    .chapter .entry{
-        background-color: rgba(0,0,0,0.5);
-        color: white;
-        text-align: center;
-        height: 50px;
+    main{
+        background-color: white;
+        height: 40rem;
+        padding: 0;
     }
 </style>
 
@@ -48,13 +34,13 @@
 
 <body>
 <main>
-    <div class="chapter">
-        <img src="../../assets/image/0001-header.jpg" >
-
-        <p class="intro">hahahahah introdution</p>
-        <button class="entry">阅读</button>
-
-
+    <div class="card">
+        <img src="../assets/image/0001-header.jpg" >
+        <div class="intro">
+            <h1 class="title">叫我标题</h1>
+            <p class="text">hahahahah introdution</p>
+            <button class="link">阅读</button>
+        </div>
     </div>
 </main>
 

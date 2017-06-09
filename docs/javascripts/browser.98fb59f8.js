@@ -77,40 +77,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AttrListener = __webpack_require__(14);
-
-var _AttrListener2 = _interopRequireDefault(_AttrListener);
-
-var _functional = __webpack_require__(7);
-
-var _functional2 = _interopRequireDefault(_functional);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by Dogfish on 2017/6/3.
- */
-var mainAttrListener = new _AttrListener2.default();
-
-mainAttrListener.add("data-page", _functional2.default.innerPageJumping);
-mainAttrListener.add("data-href", _functional2.default.hrefJumping);
-mainAttrListener.add("data-anchor", _functional2.default.anchorJumping);
-mainAttrListener.add("id", _functional2.default.idEventDispatch);
-
-exports.default = mainAttrListener;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _observe = __webpack_require__(20);
+var _observe = __webpack_require__(21);
 
 var _observe2 = _interopRequireDefault(_observe);
 
@@ -122,7 +89,7 @@ var observe = new _observe2.default(); /**
 exports.default = observe;
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -191,7 +158,7 @@ var bookListData = [{
     link: ""
 }];
 var buttonTemplate = "<li><button data-href=\"%LINK%\">%NAME%</button></li>";
-var wrapperTemplate = "<div>\n                        <div class=\"col s12 mainText\">\n                            <h1>%TITLE%</h1>\n                        </div>\n                        <div class=\"col s12 links\">\n                            <ul class=\"section links-inner\">\n                                %BUTTONS_TEMPLATE%\n                            </ul>\n                        </div>\n                    </div>";
+var wrapperTemplate = "<div class=\"chapter-wrapper\">\n                        <div class=\"col s12 mainText\">\n                            <h1>%TITLE%</h1>\n                        </div>\n                        <div class=\"col s12 links\">\n                            <ul class=\"section links-inner\">\n                                %BUTTONS_TEMPLATE%\n                            </ul>\n                        </div>\n                    </div>";
 
 exports.default = {
     get: function get() {
@@ -242,12 +209,18 @@ exports.default = {
             return wrapperTemplate.replace(/%TITLE%/g, title).replace(/%BUTTONS_TEMPLATE%/g, buttons);
         }
     },
-    query: function query(name) {
+    query: function query(key) {
+        var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "name";
+
         var next = void 0,
-            prev = void 0;
+            prev = void 0,
+            parent = void 0;
         for (var i = 0; i < bookListData.length; i++) {
             var chapter = bookListData[i];
-            if (chapter.name === name) {
+            if (chapter.type === CHAPTER) {
+                parent = chapter;
+            }
+            if (chapter[type] === key) {
 
                 if (bookListData.length > 1 && i !== bookListData.length - 1) {
                     for (var j = i + 1; j < bookListData.length; j++) {
@@ -268,11 +241,58 @@ exports.default = {
                         }
                     }
                 }
-                return { current: chapter, next: next, prev: prev };
+                return { current: chapter, next: next, prev: prev, parent: parent };
             }
         }
     }
 };
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _AttrListener = __webpack_require__(14);
+
+var _AttrListener2 = _interopRequireDefault(_AttrListener);
+
+var _observe = __webpack_require__(0);
+
+var _observe2 = _interopRequireDefault(_observe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Dogfish on 2017/6/3.
+ */
+var mainAttrListener = new _AttrListener2.default();
+/*
+mainAttrListener.add("data-page",callback.innerPageJumping)
+mainAttrListener.add("data-href",callback.hrefJumping )
+mainAttrListener.add("data-anchor",callback.anchorJumping)
+mainAttrListener.add("id",callback.idEventDispatch)
+*/
+
+mainAttrListener.add("data-page", function (eventTarget, attrVal) {
+  _observe2.default.emit("data-page", { eventTarget: eventTarget, attrVal: attrVal });
+});
+mainAttrListener.add("data-href", function (eventTarget, attrVal) {
+  _observe2.default.emit("data-href", { eventTarget: eventTarget, attrVal: attrVal });
+});
+mainAttrListener.add("data-anchor", function (eventTarget, attrVal) {
+  _observe2.default.emit("data-anchor", { eventTarget: eventTarget, attrVal: attrVal });
+});
+mainAttrListener.add("id", function (eventTarget, attrVal) {
+  _observe2.default.emit("data-id", { eventTarget: eventTarget, attrVal: attrVal });
+});
+
+exports.default = mainAttrListener;
 
 /***/ }),
 /* 3 */
@@ -343,11 +363,11 @@ if (!Array.prototype.includes) {
 "use strict";
 
 
-var _observe = __webpack_require__(1);
+var _observe = __webpack_require__(0);
 
 var _observe2 = _interopRequireDefault(_observe);
 
-var _moduleLoaderStep = __webpack_require__(19);
+var _moduleLoaderStep = __webpack_require__(20);
 
 var _moduleLoaderStep2 = _interopRequireDefault(_moduleLoaderStep);
 
@@ -355,11 +375,11 @@ var _iframe = __webpack_require__(11);
 
 var _iframe2 = _interopRequireDefault(_iframe);
 
-var _template = __webpack_require__(2);
+var _template = __webpack_require__(1);
 
 var _template2 = _interopRequireDefault(_template);
 
-var _listener = __webpack_require__(0);
+var _listener = __webpack_require__(2);
 
 var _listener2 = _interopRequireDefault(_listener);
 
@@ -367,11 +387,12 @@ var _attrLoader = __webpack_require__(8);
 
 var _attrLoader2 = _interopRequireDefault(_attrLoader);
 
+var _functional = __webpack_require__(7);
+
+var _functional2 = _interopRequireDefault(_functional);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dogfish on 2017/5/22.
- */
 (function loadingStart() {
     (0, _moduleLoaderStep2.default)([[{ name: "jquery", link: "https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js", type: "js" }]], moduleOnload, main);
     function moduleOnload(count, total, name, type, link) {
@@ -380,25 +401,35 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     }
     function main() {
 
-        _observe2.default.on("initial", function () {
-
-            document.querySelector("[data-append=all-chapter]").innerHTML = _template2.default.get();
-            document.querySelector("[data-append=all-chapter] button").classList.add("is-active");
-
-            _iframe2.default.initial();
-            document.getElementById("view").addEventListener("load", _iframe2.default.initial);
-
-            document.addEventListener("click", function (event) {
-                _listener2.default.pushEvent(event.target);
-            });
-        });
+        _observe2.default.on("initial", initial);
 
         _observe2.default.on("iframe-load", function () {
             _attrLoader2.default.exec();
         });
+
+        _observe2.default.on("data-href", _functional2.default.hrefJumping);
+        _observe2.default.on("data-href", _functional2.default.loadHrefTitle);
+
+        _observe2.default.on("data-page", _functional2.default.innerPageJumping);
+        _observe2.default.on("data-anchor", _functional2.default.anchorJumping);
+        _observe2.default.on("data-id", _functional2.default.idEventDispatch);
+
         _observe2.default.emit("initial");
     }
-})();
+
+    function initial() {
+
+        document.querySelector("[data-append=all-chapter]").innerHTML = _template2.default.get();
+        document.querySelector("[data-append=all-chapter] button").classList.add("is-active");
+        _iframe2.default.initial();
+        document.getElementById("view").addEventListener("load", _iframe2.default.initial);
+        document.addEventListener("click", function (event) {
+            _listener2.default.pushEvent(event.target);
+        });
+    }
+})(); /**
+       * Created by Dogfish on 2017/5/22.
+       */
 
 /***/ }),
 /* 5 */
@@ -417,6 +448,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _template = __webpack_require__(1);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _DOMtracker = __webpack_require__(16);
+
+var _DOMtracker2 = _interopRequireDefault(_DOMtracker);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  * Created by Dogfish on 2017/6/4.
  */
@@ -446,32 +488,67 @@ function gotoView($node) {
 }
 
 exports.default = {
-    anchorJumping: function anchorJumping(element, attrVal) {
+    anchorJumping: function anchorJumping(_ref) {
+        var element = _ref.element,
+            attrVal = _ref.attrVal;
+
         //链接内部跳转
         var iframeView = document.getElementById("view");
         var anchorElement = iframeView.contentDocument.getElementById(attrVal);
         gotoView(anchorElement);
         menuSwitch(false);
     },
-    hrefJumping: function hrefJumping(element, attrVal) {
+    hrefJumping: function hrefJumping(_ref2) {
+        var element = _ref2.element,
+            attrVal = _ref2.attrVal;
+
         //链接内部跳转
         $("[data-href]").removeClass("is-active");
         $("[data-href=\"" + attrVal + "\"]").addClass("is-active");
         document.getElementById("view").src = attrVal;
         menuSwitch(false);
     },
-    innerPageJumping: function innerPageJumping(eventTarget, attrVal) {
+    innerPageJumping: function innerPageJumping(_ref3) {
+        var eventTarget = _ref3.eventTarget,
+            attrVal = _ref3.attrVal;
+
         $(".page").removeClass("is-active");
         $("[data-page-target=" + attrVal + "]").addClass("is-active");
 
         $(".title-selector").removeClass("is-active");
         eventTarget.classList.add("is-active");
         menuSwitch(true);
+
+        //特殊页面的处理
+        switch (attrVal) {
+            case "chapter-list":
+                var node = _DOMtracker2.default.getNodeByAttr("class", document.querySelector("[data-append=all-chapter] button.is-active"), "chapter-wrapper");
+                if (node) {
+                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop;
+                }
+                break;
+            default:
+                break;
+        }
     },
-    idEventDispatch: function idEventDispatch(eventTarget, id) {
-        switch (id) {
+    loadHrefTitle: function loadHrefTitle(_ref4) {
+        var eventTarget = _ref4.eventTarget,
+            attrVal = _ref4.attrVal;
+
+        var content = _template2.default.query(attrVal, "link");
+        document.getElementById("chapter-child-title").innerText = content.current.name;
+        document.getElementById("chapter-title").innerText = content.parent.name;
+    },
+    idEventDispatch: function idEventDispatch(_ref5) {
+        var eventTarget = _ref5.eventTarget,
+            attrVal = _ref5.attrVal;
+
+        switch (attrVal) {
             case "#menu":
                 menuSwitch();
+                if ($(".popMenu").hasClass("menu-active")) {
+                    document.body.querySelector('[data-page=chapter-content]').click();
+                }
                 break;
             case "":
                 break;
@@ -523,7 +600,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _template = __webpack_require__(2);
+var _template = __webpack_require__(1);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -584,15 +661,15 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _observe = __webpack_require__(1);
+var _observe = __webpack_require__(0);
 
 var _observe2 = _interopRequireDefault(_observe);
 
-var _hightlight = __webpack_require__(17);
+var _hightlight = __webpack_require__(18);
 
 var _hightlight2 = _interopRequireDefault(_hightlight);
 
-var _listener = __webpack_require__(0);
+var _listener = __webpack_require__(2);
 
 var _listener2 = _interopRequireDefault(_listener);
 
@@ -608,50 +685,56 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     initial: function initial() {
         //attr tracker
-        var iDoc = document.getElementById("view");
-        //点击监听
-        document.getElementById("view").contentDocument.body.addEventListener("click", function (event) {
-            _listener2.default.pushEvent(event.target);
-        });
-        //滚动监听
-        _hightlight2.default.listenEx({ scrollBody: iDoc.contentDocument.body, scrollTarget: document.getElementById("view-outer") });
-        //生成滚动小节并且监听
-        var template = "";
-        // polyfill of webpack ???
-        var nodeList = iDoc.contentDocument.body.querySelectorAll("section[data-anchor-trigger]");
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+        var view = document.getElementById("view");
+        var viewDoc = view.contentDocument;
+        var viewDocBody = viewDoc.body;
+        if (viewDocBody) {
+            //点击监听
+            viewDocBody.addEventListener("click", function (event) {
+                _listener2.default.pushEvent(event.target);
+            });
+            //滚动监听
+            _hightlight2.default.listenEx({ scrollBody: viewDocBody, scrollTarget: document.getElementById("view-outer") });
+            //生成滚动小节并且监听
+            var template = "";
+            // polyfill of webpack ???
+            var nodeList = viewDocBody.querySelectorAll("section[data-anchor-trigger]");
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
-        try {
-            for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var section = _step.value;
-
-                var sectionID = section.getAttribute("data-anchor-trigger");
-                var sectionName = section.getAttribute("data-goto-title");
-                template += "<li><button data-anchor=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
-            }
-        } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-        } finally {
             try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                    _iterator.return();
+                for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var section = _step.value;
+
+                    var sectionID = section.getAttribute("data-anchor-trigger");
+                    var sectionName = section.getAttribute("data-goto-title");
+                    template += "<li><button data-anchor=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
                 }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
             } finally {
-                if (_didIteratorError) {
-                    throw _iteratorError;
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
                 }
             }
+
+            document.getElementById("chapter-insert").innerHTML = template;
+
+            _parallaxScroll2.default.initial(viewDocBody, document.getElementById("view-outer"));
         }
 
-        document.getElementById("chapter-insert").innerHTML = template;
         //高度样式重新计算，重置滚动窗口
         document.getElementById("view-outer").scrollTop = 0;
-        iDoc.style.height = window.getComputedStyle(iDoc.contentDocument.body).height;
-        //iframe初始化完成！
-        _parallaxScroll2.default.initial(document.getElementById("view").contentDocument.body, document.getElementById("view-outer"));
+        view.style.height = window.getComputedStyle(viewDocBody).height;
+
         _observe2.default.emit("iframe-load");
     }
 };
@@ -667,7 +750,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _parallaxScroll = __webpack_require__(21);
+var _parallaxScroll = __webpack_require__(22);
 
 var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
 
@@ -778,7 +861,7 @@ attrLoader.prototype.exec = function () {
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = document.getElementsByTagName("iframe")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = Array.prototype.slice.call(document.getElementsByTagName("iframe"))[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var iframe = _step.value;
 
                     var _queryString = valCallback.val ? "[" + attr + "='" + valCallback.val + "']" : "[" + attr + "]";
@@ -888,12 +971,67 @@ exports.default = attrLoader;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+/**
+ * Created by Dogfish on 2017/4/23.
+ */
+exports.default = {
+    getNodeByAttr: function getNodeByAttr(attr, sourceElement, value) {
+        if (typeof sourceElement === "string") {
+            sourceElement = document.getElementById(sourceElement);
+        }
+
+        var attrVal = sourceElement.getAttribute(attr);
+        if (attrVal && (typeof value === "undefined" || value === attrVal)) {
+            return sourceElement;
+        }
+
+        do {
+            sourceElement = sourceElement.parentElement;
+            if (!sourceElement) {
+                return;
+            }
+            attrVal = sourceElement.getAttribute(attr);
+        } while (attrVal === null || !(typeof value === "undefined" || value === attrVal));
+
+        return sourceElement;
+    },
+    //返回最近的属性值
+    getValByAttr: function getValByAttr(attr, sourceElement) {
+        if (typeof sourceElement === "string") {
+            sourceElement = document.getElementById(sourceElement);
+        }
+        var attrVal = sourceElement.getAttribute(attr);
+        if (attrVal) {
+            return attrVal;
+        }
+        do {
+            sourceElement = sourceElement.parentElement;
+            if (!sourceElement) {
+                return attrVal;
+            }
+            attrVal = sourceElement.getAttribute(attr);
+        } while (attrVal === null);
+
+        return attrVal;
+    }
+};
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /**
                                                                                                                                                                                                                                                                                * Created by Dogfish on 2017/4/17.
                                                                                                                                                                                                                                                                                */
 
-var _redo = __webpack_require__(22);
+var _redo = __webpack_require__(23);
 
 var _redo2 = _interopRequireDefault(_redo);
 
@@ -975,7 +1113,7 @@ autoBuffer.prototype.stopBuffer = function () {
 exports.default = autoBuffer;
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1036,14 +1174,14 @@ var hg = {
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = document.getElementsByTagName("iframe")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = Array.prototype.slice.call(document.getElementsByTagName("iframe"))[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var iframe = _step.value;
                     var _iteratorNormalCompletion4 = true;
                     var _didIteratorError4 = false;
                     var _iteratorError4 = undefined;
 
                     try {
-                        for (var _iterator4 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + triggerAttr + "]")[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+                        for (var _iterator4 = Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + triggerAttr + "]"))[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
                             var $activedEl = _step4.value;
 
 
@@ -1073,7 +1211,7 @@ var hg = {
                     var _iteratorError5 = undefined;
 
                     try {
-                        for (var _iterator5 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+                        for (var _iterator5 = Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
                             var $triggerEl = _step5.value;
 
 
@@ -1119,7 +1257,7 @@ var hg = {
             var _iteratorError2 = undefined;
 
             try {
-                for (var _iterator2 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                for (var _iterator2 = Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
                     var _$activedEl = _step2.value;
 
 
@@ -1149,7 +1287,7 @@ var hg = {
             var _iteratorError3 = undefined;
 
             try {
-                for (var _iterator3 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                for (var _iterator3 = Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
                     var _$triggerEl = _step3.value;
 
 
@@ -1219,14 +1357,14 @@ var hg = {
             var _iteratorError6 = undefined;
 
             try {
-                for (var _iterator6 = document.getElementsByTagName("iframe")[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
+                for (var _iterator6 = Array.prototype.slice.call(document.getElementsByTagName("iframe"))[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
                     var iframe = _step6.value;
                     var _iteratorNormalCompletion9 = true;
                     var _didIteratorError9 = false;
                     var _iteratorError9 = undefined;
 
                     try {
-                        for (var _iterator9 = iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
+                        for (var _iterator9 = Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))[Symbol.iterator](), _step9; !(_iteratorNormalCompletion9 = (_step9 = _iterator9.next()).done); _iteratorNormalCompletion9 = true) {
                             var $activedEl = _step9.value;
 
 
@@ -1256,7 +1394,7 @@ var hg = {
                     var _iteratorError10 = undefined;
 
                     try {
-                        for (var _iterator10 = iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+                        for (var _iterator10 = Array.prototype.slice.call(iframe.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
                             var $triggerEl = _step10.value;
 
 
@@ -1302,7 +1440,7 @@ var hg = {
             var _iteratorError7 = undefined;
 
             try {
-                for (var _iterator7 = document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]")[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+                for (var _iterator7 = Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "]" + "[class~=" + activeClass + "]"))[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
                     var _$activedEl2 = _step7.value;
 
 
@@ -1332,7 +1470,7 @@ var hg = {
             var _iteratorError8 = undefined;
 
             try {
-                for (var _iterator8 = document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]")[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+                for (var _iterator8 = Array.prototype.slice.call(document.querySelectorAll("[" + triggerAttr + "=" + sectionID + "]"))[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
                     var _$triggerEl2 = _step8.value;
 
 
@@ -1381,7 +1519,7 @@ var hg = {
 exports.default = hg;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1475,7 +1613,7 @@ moduleLoader.prototype.onload = function (count, total, name, type, link) {};
 exports.default = moduleLoader;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1485,7 +1623,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _moduleLoader = __webpack_require__(18);
+var _moduleLoader = __webpack_require__(19);
 
 var _moduleLoader2 = _interopRequireDefault(_moduleLoader);
 
@@ -1519,7 +1657,7 @@ function moduleLoaderStep(list, onload, complete) {
 exports.default = moduleLoaderStep;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1647,7 +1785,7 @@ observe.prototype.emitByStep = function (event, arg) {
 exports.default = observe;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1657,25 +1795,19 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _autoBuffer = __webpack_require__(16);
+var _autoBuffer = __webpack_require__(17);
 
 var _autoBuffer2 = _interopRequireDefault(_autoBuffer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dogfish on 2017/6/6.
- */
-
-__webpack_require__(23);
-
-
-var proptyList = ["parallax-speed", "parallax-zIndex"];
+var proptyList = ["parallax-speed", "parallax-zIndex"]; /**
+                                                         * Created by Dogfish on 2017/6/6.
+                                                         */
 
 function parallax() {
     // this.elementList =[{element:$element,params:{speed,z-index...ect}}]
     this.elementList = undefined;
-    this.listenTarget = document.body;
     this.buffer = new _autoBuffer2.default({ interval: 17, callback: this.onScroll }, this);
 }
 
@@ -1743,7 +1875,6 @@ parallax.prototype.initial = function () {
     var $scrollTarget = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.body;
 
     var that = this;
-    this.listenTarget = $scrollTarget;
     this.lastScrollTop = 0;
     this.update($document);
     $scrollTarget.removeEventListener("scroll", onScroll);
@@ -1769,8 +1900,7 @@ parallax.prototype.onScroll = function (_ref) {
         for (var _iterator3 = this.elementList[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
             var preset = _step3.value;
 
-            preset.element.style.top = (Number(preset.element.style.top.slice(0, -2)) + Number(preset.params["parallax-speed"]) * movedDistance).toFixed(2) + "px";
-            console.log(Number(preset.params["parallax-speed"]) * movedDistance);
+            preset.element.style.top = (pxToNumber(preset.element.style.top) + Number(preset.params["parallax-speed"]) * movedDistance).toFixed(2) + "px";
         }
     } catch (err) {
         _didIteratorError3 = true;
@@ -1790,10 +1920,17 @@ parallax.prototype.onScroll = function (_ref) {
     this.lastScrollTop = scrollTop;
 };
 
+function pxToNumber(pxValue) {
+    var digits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+
+    return (/\d+px/.test(pxValue) ? Number(Number(pxValue.slice(0, -2)).toFixed(digits)) : 0
+    );
+}
+
 exports.default = parallax;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1853,12 +1990,6 @@ redo.prototype.end = function (callFunction) {
 };
 
 exports.default = redo;
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

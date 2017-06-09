@@ -187,6 +187,54 @@ button.big:hover {
   border: 2px transparent solid;
   background-color: black;
 }
+.card {
+  height: 250px;
+}
+.card img {
+  width: 100%;
+}
+.card .intro {
+  color: white;
+  height: 8rem;
+  background-color: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  opacity: .99;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.card .intro .title {
+  color: black;
+  text-align: center;
+  margin: 0;
+  font-size: 1rem;
+  border-bottom: thin lightgray solid;
+}
+.card .intro button.link {
+  background-color: whitesmoke;
+  color: grey;
+  border: none;
+  width: 100%;
+  height: 3rem;
+  transition: .5s;
+  cursor: pointer;
+}
+.card .intro button.link:hover {
+  background-color: grey;
+  color: white;
+}
+.card .intro p.text {
+  color: grey;
+  margin: 0;
+  padding: 1rem;
+}
 .hidden {
   display: none ;
 }
@@ -212,12 +260,13 @@ button.big:hover {
   footer button {
     width: 100%;
   }
+  .card .intro {
+    min-width: 100%;
+    margin: 0;
+    width: 100%;
+  }
 }
 @media only screen and (min-device-width: 768px) {
-  main {
-    max-width: 60rem;
-    margin: 0 auto;
-  }
   button.big {
     width: 350px;
     border: 2px black solid;
@@ -231,6 +280,11 @@ button.big:hover {
   }
   footer button.big {
     width: 40%;
+  }
+  .card .intro {
+    width: 60%;
+    min-width: 20rem;
+    margin: -6.25% auto 0;
   }
 }
 *::-webkit-scrollbar {
