@@ -52,17 +52,6 @@ module.exports = {
 
         ///////////////// 起舞弄清影 /////////////////////////
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
-            filename: __dirname + '/docs/contents/起/十年一觉广告梦.html',
-            template: __dirname + '/src/templates/contents/起/十年一觉广告梦.html',
-            inject:  'body',
-            hash: true,
-            chunks: ['innerContent'],
-            minify: { //压缩HTML文件
-                removeComments: true,
-                collapseWhitespace: false
-            }
-        }),
-        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/起/封面.html',
             template: __dirname + '/src/templates/contents/起/封面.html',
             inject:  'body',
@@ -73,8 +62,42 @@ module.exports = {
                 collapseWhitespace: false
             }
         }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/起/导语.html',
+            template: __dirname + '/src/templates/contents/起/导语.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/起/十年一觉广告梦.html',
+            template: __dirname + '/src/templates/contents/起/十年一觉广告梦.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+
 
         ///////////////// 承 /////////////////////////
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/承/导语.html',
+            template: __dirname + '/src/templates/contents/承/导语.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/承/沈伟采访.html',
             template: __dirname + '/src/templates/contents/承/沈伟采访.html',
@@ -111,6 +134,120 @@ module.exports = {
         new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
             filename: __dirname + '/docs/contents/contents.html',
             template: __dirname + '/src/templates/contents/contents.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+
+        ///////////////// 转 /////////////////////////
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/导语.html',
+            template: __dirname + '/src/templates/contents/转/导语.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/陈汉.html',
+            template: __dirname + '/src/templates/contents/转/陈汉.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/陈国濠.html',
+            template: __dirname + '/src/templates/contents/转/陈国濠.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/胡倩苑.html',
+            template: __dirname + '/src/templates/contents/转/胡倩苑.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/黄汇东.html',
+            template: __dirname + '/src/templates/contents/转/黄汇东.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/转/虞晨.html',
+            template: __dirname + '/src/templates/contents/转/虞晨.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+
+        ///////////////// 合 /////////////////////////
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/合/导语.html',
+            template: __dirname + '/src/templates/contents/合/导语.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/合/历届优秀作品·平面类.html',
+            template: __dirname + '/src/templates/contents/合/历届优秀作品·平面类.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/合/历届优秀作品·策划类.html',
+            template: __dirname + '/src/templates/contents/合/历届优秀作品·策划类.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/合/历届优秀作品·视频类.html',
+            template: __dirname + '/src/templates/contents/合/历届优秀作品·视频类.html',
             inject:  'body',
             hash: true,
             chunks: ['innerContent'],

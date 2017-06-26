@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -77,7 +77,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _observe = __webpack_require__(21);
+var _observe = __webpack_require__(22);
 
 var _observe2 = _interopRequireDefault(_observe);
 
@@ -118,6 +118,9 @@ var bookListData = [{
     name: "起·舞弄清影", type: CHAPTER,
     link: ""
 }, {
+    name: "起·舞弄清影-导语", type: CHILD_CHAPTER,
+    link: "./contents/起/导语.html"
+}, {
     name: "十年一觉广告梦", type: CHILD_CHAPTER,
     link: "./contents/起/十年一觉广告梦.html"
 },
@@ -127,6 +130,9 @@ var bookListData = [{
 {
     name: "承·恩雨露流", type: CHAPTER,
     link: ""
+}, {
+    name: "承·恩雨露流-导语", type: CHILD_CHAPTER,
+    link: "./contents/承/导语.html"
 }, {
     name: "沈伟：一桥筑梦初心显", type: CHILD_CHAPTER,
     link: "./contents/承/沈伟采访.html"
@@ -141,21 +147,43 @@ var bookListData = [{
 //转·眼光阴暑渐除
 
 {
-    name: "转·眼光阴暑渐除", type: CHAPTER,
+    name: "转·眼光阴暑渐消", type: CHAPTER,
     link: ""
 }, {
-    name: "未确定的标题内容", type: CHILD_CHAPTER,
-    link: ""
+    name: "转·眼光阴暑渐消-导语", type: CHILD_CHAPTER,
+    link: "./contents/转/导语.html"
+}, {
+    name: "采访：陈汉", type: CHILD_CHAPTER,
+    link: "./contents/转/陈汉.html"
+}, {
+    name: "采访：胡倩苑", type: CHILD_CHAPTER,
+    link: "./contents/转/胡倩苑.html"
+}, {
+    name: "采访：黄汇东", type: CHILD_CHAPTER,
+    link: "./contents/转/黄汇东.html"
+}, {
+    name: "采访：虞晨", type: CHILD_CHAPTER,
+    link: "./contents/转/虞晨.html"
+}, {
+    name: "采访：陈国濠", type: CHILD_CHAPTER,
+    link: "./contents/转/陈国濠.html"
 },
-
 //合·睦此生乐百年
-
 {
     name: "合·睦此生乐百年", type: CHAPTER,
     link: ""
 }, {
-    name: "未确定的标题内容", type: CHILD_CHAPTER,
-    link: ""
+    name: "合睦此生乐百年-导语", type: CHILD_CHAPTER,
+    link: "./contents/合/导语.html"
+}, {
+    name: "历届优秀作品·平面类", type: CHILD_CHAPTER,
+    link: "./contents/合/历届优秀作品·平面类.html"
+}, {
+    name: "历届优秀作品·策划类", type: CHILD_CHAPTER,
+    link: "./contents/合/历届优秀作品·策划类.html"
+}, {
+    name: "历届优秀作品·视频类", type: CHILD_CHAPTER,
+    link: "./contents/合/历届优秀作品·视频类.html"
 }];
 var buttonTemplate = "<li><button data-href=\"%LINK%\">%NAME%</button></li>";
 var wrapperTemplate = "<div class=\"chapter-wrapper\">\n                        <div class=\"col s12 mainText\">\n                            <h1>%TITLE%</h1>\n                        </div>\n                        <div class=\"col s12 links\">\n                            <ul class=\"section links-inner\">\n                                %BUTTONS_TEMPLATE%\n                            </ul>\n                        </div>\n                    </div>";
@@ -255,10 +283,162 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _template = __webpack_require__(1);
+
+var _template2 = _interopRequireDefault(_template);
+
+var _DOMtracker = __webpack_require__(17);
+
+var _DOMtracker2 = _interopRequireDefault(_DOMtracker);
+
+var _functional = __webpack_require__(4);
+
+var _functional2 = _interopRequireDefault(_functional);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function menuSwitch(status) {
+    var menu = $(".popMenu");
+    var menuButton = $(".hamburger--collapse");
+    if (status === true) {
+        menu.addClass("menu-active");
+        menuButton.addClass("is-active");
+    } else if (status === false) {
+        menu.removeClass("menu-active");
+        menuButton.removeClass("is-active");
+    } else {
+        menu.toggleClass("menu-active");
+        menuButton.toggleClass("is-active");
+    }
+} /**
+   * Created by Dogfish on 2017/6/4.
+   */
+
+
+function gotoView($node) {
+    var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
+
+
+    var targetTop = $node.offsetTop;
+    var outer = document.getElementById("view-outer");
+    $(outer).animate({ scrollTop: targetTop - offset }, 1000);
+    // outer.scrollTop = targetTop - offset
+}
+
+exports.default = {
+    anchorJumping: function anchorJumping(_ref) {
+        var element = _ref.element,
+            attrVal = _ref.attrVal;
+
+        //链接内部跳转
+        var iframeView = document.getElementById("view");
+        var anchorElement = iframeView.contentDocument.getElementById(attrVal);
+        gotoView(anchorElement);
+        menuSwitch(false);
+    },
+    hrefJumping: function hrefJumping(_ref2) {
+        var element = _ref2.element,
+            attrVal = _ref2.attrVal;
+
+        //链接内部跳转
+        $("[data-href]").removeClass("is-active");
+        $("[data-href=\"" + attrVal + "\"]").addClass("is-active");
+
+        document.getElementById("view").src = attrVal;
+        menuSwitch(false);
+    },
+    innerPageJumping: function innerPageJumping(_ref3) {
+        var eventTarget = _ref3.eventTarget,
+            attrVal = _ref3.attrVal;
+
+        $(".page").removeClass("is-active");
+        $("[data-page-target=" + attrVal + "]").addClass("is-active");
+
+        $(".title-selector").removeClass("is-active");
+        eventTarget.classList.add("is-active");
+        menuSwitch(true);
+
+        //特殊页面的处理，例如跳转章节页面后，滚动到指定的激活位置
+        switch (attrVal) {
+            case "chapter-list":
+                var node = _DOMtracker2.default.getNodeByAttr("class", document.querySelector("[data-append=all-chapter] button.is-active"), "chapter-wrapper");
+                if (node) {
+                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop + 100;
+                }
+                break;
+            default:
+                break;
+        }
+    },
+    loadHrefTitle: function loadHrefTitle(_ref4) {
+        var eventTarget = _ref4.eventTarget,
+            attrVal = _ref4.attrVal;
+
+        var content = _template2.default.query(attrVal, "link");
+        document.getElementById("chapter-child-title").innerText = content.current.name;
+        document.getElementById("chapter-title").innerText = content.parent.name;
+    },
+    idEventDispatch: function idEventDispatch(_ref5) {
+        var eventTarget = _ref5.eventTarget,
+            attrVal = _ref5.attrVal;
+
+        switch (attrVal) {
+            case "#menu":
+                menuSwitch();
+                if ($(".popMenu").hasClass("menu-active")) {
+                    document.body.querySelector('[data-page=chapter-content]').click();
+                }
+                break;
+            case "":
+                break;
+            default:
+                break;
+        }
+    },
+    activeClass: function activeClass(_ref6) {
+        var eventTarget = _ref6.eventTarget,
+            attrVal = _ref6.attrVal,
+            key = _ref6.key;
+
+        var view = $("#view").contents();
+        var tagKey = attrVal;
+        //自己所属的标记
+        var removeSelector = eventTarget.getAttribute("tag-remove");
+        if (removeSelector) {
+            $(removeSelector).removeClass(tagKey);
+            view.find(removeSelector).removeClass(tagKey);
+        }
+
+        var addSelector = eventTarget.getAttribute("tag-add");
+        if (addSelector) {
+            $(addSelector).addClass(tagKey);
+            view.find(addSelector).addClass(tagKey);
+        }
+
+        _functional2.default.refitStyle();
+    },
+    activePage: function activePage(_ref7) {
+        var eventTarget = _ref7.eventTarget,
+            attrVal = _ref7.attrVal,
+            key = _ref7.key;
+    }
+};
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AttrListener = __webpack_require__(14);
+var _AttrListener = __webpack_require__(15);
 
 var _AttrListener2 = _interopRequireDefault(_AttrListener);
 
@@ -266,11 +446,12 @@ var _observe = __webpack_require__(0);
 
 var _observe2 = _interopRequireDefault(_observe);
 
+var _functional = __webpack_require__(2);
+
+var _functional2 = _interopRequireDefault(_functional);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Created by Dogfish on 2017/6/3.
- */
 var mainAttrListener = new _AttrListener2.default();
 /*
 mainAttrListener.add("data-page",callback.innerPageJumping)
@@ -279,23 +460,153 @@ mainAttrListener.add("data-anchor",callback.anchorJumping)
 mainAttrListener.add("id",callback.idEventDispatch)
 */
 
+/**
+ * Created by Dogfish on 2017/6/3.
+ */
 mainAttrListener.add("data-page", function (eventTarget, attrVal) {
-  _observe2.default.emit("data-page", { eventTarget: eventTarget, attrVal: attrVal });
+  _observe2.default.emit("data-page", { eventTarget: eventTarget, attrVal: attrVal, key: "data-page" });
 });
 mainAttrListener.add("data-href", function (eventTarget, attrVal) {
-  _observe2.default.emit("data-href", { eventTarget: eventTarget, attrVal: attrVal });
+  _observe2.default.emit("data-href", { eventTarget: eventTarget, attrVal: attrVal, key: "data-href" });
 });
 mainAttrListener.add("data-anchor", function (eventTarget, attrVal) {
-  _observe2.default.emit("data-anchor", { eventTarget: eventTarget, attrVal: attrVal });
+  _observe2.default.emit("data-anchor", { eventTarget: eventTarget, attrVal: attrVal, key: "data-anchor" });
 });
 mainAttrListener.add("id", function (eventTarget, attrVal) {
-  _observe2.default.emit("data-id", { eventTarget: eventTarget, attrVal: attrVal });
+  _observe2.default.emit("data-id", { eventTarget: eventTarget, attrVal: attrVal, key: "id" });
+});
+
+//根据 class-active 设置 active 状态名，根据class-tag取消/设置同类
+mainAttrListener.add("tag-key", function (eventTarget, attrVal) {
+  _functional2.default.activeClass({ eventTarget: eventTarget, attrVal: attrVal, key: "tag-key" });
 });
 
 exports.default = mainAttrListener;
 
 /***/ }),
-/* 3 */
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _hightlight = __webpack_require__(19);
+
+var _hightlight2 = _interopRequireDefault(_hightlight);
+
+var _listener = __webpack_require__(3);
+
+var _listener2 = _interopRequireDefault(_listener);
+
+var _parallaxScroll = __webpack_require__(13);
+
+var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var view = document.getElementById("view"); /**
+                                             * Created by Dogfish on 2017/6/25.
+                                             */
+
+exports.default = {
+    clickListen: function clickListen() {
+        var viewDocBody = view.contentDocument.body;
+        if (viewDocBody) {
+            //点击监听
+            viewDocBody.addEventListener("click", function (event) {
+                _listener2.default.pushEvent(event.target);
+            });
+        }
+    },
+    scrollListen: function scrollListen() {
+        var viewDocBody = view.contentDocument.body;
+        if (viewDocBody) {
+            //点击监听
+            _hightlight2.default.listenEx({ scrollBody: viewDocBody, scrollTarget: document.getElementById("view-outer") });
+        }
+    },
+    parallaxListen: function parallaxListen() {
+        var viewDocBody = view.contentDocument.body;
+        _parallaxScroll2.default.initial(viewDocBody, document.getElementById("view-outer"));
+    },
+    imgLoadListen: function imgLoadListen() {
+        var viewDocBody = view.contentDocument.body;
+        viewDocBody.querySelectorAll("img");
+
+        var nodeList = viewDocBody.querySelectorAll("img");
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var img = _step.value;
+
+                img.onload = function () {
+                    view.style.height = window.getComputedStyle(viewDocBody).height;
+                };
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+    },
+    chapterGenerator: function chapterGenerator() {
+        var viewDocBody = view.contentDocument.body;
+        var template = "";
+        // polyfill of webpack ???
+        var nodeList = viewDocBody.querySelectorAll("section[data-anchor-trigger]");
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+            for (var _iterator2 = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var section = _step2.value;
+
+                var sectionID = section.getAttribute("data-anchor-trigger");
+                var sectionName = section.getAttribute("data-goto-title");
+                template += "<li><button data-anchor=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
+
+        document.getElementById("chapter-insert").innerHTML = template;
+    },
+    refitStyle: function refitStyle() {
+        var viewDocBody = view.contentDocument.body;
+        view.style.height = window.getComputedStyle(viewDocBody).height;
+    }
+};
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -357,7 +668,7 @@ if (!Array.prototype.includes) {
 }
 
 /***/ }),
-/* 4 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -367,11 +678,11 @@ var _observe = __webpack_require__(0);
 
 var _observe2 = _interopRequireDefault(_observe);
 
-var _moduleLoaderStep = __webpack_require__(20);
+var _moduleLoaderStep = __webpack_require__(21);
 
 var _moduleLoaderStep2 = _interopRequireDefault(_moduleLoaderStep);
 
-var _iframe = __webpack_require__(11);
+var _iframe = __webpack_require__(12);
 
 var _iframe2 = _interopRequireDefault(_iframe);
 
@@ -379,15 +690,15 @@ var _template = __webpack_require__(1);
 
 var _template2 = _interopRequireDefault(_template);
 
-var _listener = __webpack_require__(2);
+var _listener = __webpack_require__(3);
 
 var _listener2 = _interopRequireDefault(_listener);
 
-var _attrLoader = __webpack_require__(8);
+var _attrLoader = __webpack_require__(9);
 
 var _attrLoader2 = _interopRequireDefault(_attrLoader);
 
-var _functional = __webpack_require__(7);
+var _functional = __webpack_require__(2);
 
 var _functional2 = _interopRequireDefault(_functional);
 
@@ -413,6 +724,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
         _observe2.default.on("data-page", _functional2.default.innerPageJumping);
         _observe2.default.on("data-anchor", _functional2.default.anchorJumping);
         _observe2.default.on("data-id", _functional2.default.idEventDispatch);
+        _observe2.default.on("class-active", _functional2.default.activeClass);
 
         _observe2.default.emit("initial");
     }
@@ -432,134 +744,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
        */
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 6 */,
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _template = __webpack_require__(1);
-
-var _template2 = _interopRequireDefault(_template);
-
-var _DOMtracker = __webpack_require__(16);
-
-var _DOMtracker2 = _interopRequireDefault(_DOMtracker);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/**
- * Created by Dogfish on 2017/6/4.
- */
-function menuSwitch(status) {
-    var menu = $(".popMenu");
-    var menuButton = $(".hamburger--collapse");
-    if (status === true) {
-        menu.addClass("menu-active");
-        menuButton.addClass("is-active");
-    } else if (status === false) {
-        menu.removeClass("menu-active");
-        menuButton.removeClass("is-active");
-    } else {
-        menu.toggleClass("menu-active");
-        menuButton.toggleClass("is-active");
-    }
-}
-
-function gotoView($node) {
-    var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 150;
-
-
-    var targetTop = $node.offsetTop;
-    var outer = document.getElementById("view-outer");
-    $(outer).animate({ scrollTop: targetTop - offset }, 1000);
-    // outer.scrollTop = targetTop - offset
-}
-
-exports.default = {
-    anchorJumping: function anchorJumping(_ref) {
-        var element = _ref.element,
-            attrVal = _ref.attrVal;
-
-        //链接内部跳转
-        var iframeView = document.getElementById("view");
-        var anchorElement = iframeView.contentDocument.getElementById(attrVal);
-        gotoView(anchorElement);
-        menuSwitch(false);
-    },
-    hrefJumping: function hrefJumping(_ref2) {
-        var element = _ref2.element,
-            attrVal = _ref2.attrVal;
-
-        //链接内部跳转
-        $("[data-href]").removeClass("is-active");
-        $("[data-href=\"" + attrVal + "\"]").addClass("is-active");
-        document.getElementById("view").src = attrVal;
-        menuSwitch(false);
-    },
-    innerPageJumping: function innerPageJumping(_ref3) {
-        var eventTarget = _ref3.eventTarget,
-            attrVal = _ref3.attrVal;
-
-        $(".page").removeClass("is-active");
-        $("[data-page-target=" + attrVal + "]").addClass("is-active");
-
-        $(".title-selector").removeClass("is-active");
-        eventTarget.classList.add("is-active");
-        menuSwitch(true);
-
-        //特殊页面的处理
-        switch (attrVal) {
-            case "chapter-list":
-                var node = _DOMtracker2.default.getNodeByAttr("class", document.querySelector("[data-append=all-chapter] button.is-active"), "chapter-wrapper");
-                if (node) {
-                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop;
-                }
-                break;
-            default:
-                break;
-        }
-    },
-    loadHrefTitle: function loadHrefTitle(_ref4) {
-        var eventTarget = _ref4.eventTarget,
-            attrVal = _ref4.attrVal;
-
-        var content = _template2.default.query(attrVal, "link");
-        document.getElementById("chapter-child-title").innerText = content.current.name;
-        document.getElementById("chapter-title").innerText = content.parent.name;
-    },
-    idEventDispatch: function idEventDispatch(_ref5) {
-        var eventTarget = _ref5.eventTarget,
-            attrVal = _ref5.attrVal;
-
-        switch (attrVal) {
-            case "#menu":
-                menuSwitch();
-                if ($(".popMenu").hasClass("menu-active")) {
-                    document.body.querySelector('[data-page=chapter-content]').click();
-                }
-                break;
-            case "":
-                break;
-            default:
-                break;
-        }
-    }
-};
-
-/***/ }),
-/* 8 */
+/* 8 */,
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -569,11 +761,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _AttrLoader = __webpack_require__(15);
+var _AttrLoader = __webpack_require__(16);
 
 var _AttrLoader2 = _interopRequireDefault(_AttrLoader);
 
-var _functional = __webpack_require__(9);
+var _functional = __webpack_require__(10);
 
 var _functional2 = _interopRequireDefault(_functional);
 
@@ -587,10 +779,14 @@ var mainLoader = new _AttrLoader2.default();
 mainLoader.add({ attr: "article-nav", val: "next", callback: _functional2.default.nextLink });
 mainLoader.add({ attr: "article-nav", val: "prev", callback: _functional2.default.prevLink });
 
+//是否动态加载img的src路径
+mainLoader.add({ attr: "src", callback: _functional2.default.dynamicSrc });
+mainLoader.add({ attr: "img-link", callback: _functional2.default.dynamicImglink });
+
 exports.default = mainLoader;
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -605,6 +801,13 @@ var _template = __webpack_require__(1);
 var _template2 = _interopRequireDefault(_template);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var pathCollection = ["../../assets/image/", "../assets/image/"]; /**
+                                                                   * Created by Dogfish on 2017/6/4.
+                                                                   */
+
+var remotePath = "http://oocd4kz4f.bkt.clouddn.com/";
+var c = "@$%%$@";
 
 exports.default = {
     nextLink: function nextLink(element) {
@@ -631,24 +834,77 @@ exports.default = {
         } else {
             element.classList.add("hidden");
         }
+    },
+    dynamicSrc: function dynamicSrc(element) {
+        if (element.tagName.toLowerCase() !== "img") {
+            return;
+        }
+        var elSrc = element.getAttribute("src");
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+            for (var _iterator = pathCollection[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var imgBasePath = _step.value;
+
+                var regex = new RegExp(imgBasePath);
+                if (!regex.test(elSrc)) {
+                    continue;
+                }
+                var src = elSrc.replace(imgBasePath, c).replace(/\//g, "-").replace(c, remotePath);
+                element.setAttribute("src", src);
+                break;
+            }
+        } catch (err) {
+            _didIteratorError = true;
+            _iteratorError = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
+                }
+            } finally {
+                if (_didIteratorError) {
+                    throw _iteratorError;
+                }
+            }
+        }
+    },
+    dynamicImglink: function dynamicImglink(element) {
+        var elSrc = element.getAttribute("img-link");
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
+
+        try {
+            for (var _iterator2 = pathCollection[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var imgBasePath = _step2.value;
+
+                var regex = new RegExp(imgBasePath);
+                if (!regex.test(elSrc)) {
+                    continue;
+                }
+                var src = elSrc.replace(imgBasePath, c).replace(/\//g, "-").replace(c, remotePath);
+                element.setAttribute("img-link", src);
+                break;
+            }
+        } catch (err) {
+            _didIteratorError2 = true;
+            _iteratorError2 = err;
+        } finally {
+            try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                    _iterator2.return();
+                }
+            } finally {
+                if (_didIteratorError2) {
+                    throw _iteratorError2;
+                }
+            }
+        }
     }
-
-}; /**
-    * Created by Dogfish on 2017/6/4.
-    */
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Created by Dogfish on 2017/5/22.
- */
-__webpack_require__(5);
-__webpack_require__(4);
+};
 
 /***/ }),
 /* 11 */
@@ -657,87 +913,11 @@ __webpack_require__(4);
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _observe = __webpack_require__(0);
-
-var _observe2 = _interopRequireDefault(_observe);
-
-var _hightlight = __webpack_require__(18);
-
-var _hightlight2 = _interopRequireDefault(_hightlight);
-
-var _listener = __webpack_require__(2);
-
-var _listener2 = _interopRequireDefault(_listener);
-
-var _parallaxScroll = __webpack_require__(12);
-
-var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /**
- * Created by Dogfish on 2017/6/4.
+ * Created by Dogfish on 2017/5/22.
  */
-exports.default = {
-    initial: function initial() {
-        //attr tracker
-        var view = document.getElementById("view");
-        var viewDoc = view.contentDocument;
-        var viewDocBody = viewDoc.body;
-        if (viewDocBody) {
-            //点击监听
-            viewDocBody.addEventListener("click", function (event) {
-                _listener2.default.pushEvent(event.target);
-            });
-            //滚动监听
-            _hightlight2.default.listenEx({ scrollBody: viewDocBody, scrollTarget: document.getElementById("view-outer") });
-            //生成滚动小节并且监听
-            var template = "";
-            // polyfill of webpack ???
-            var nodeList = viewDocBody.querySelectorAll("section[data-anchor-trigger]");
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-                for (var _iterator = Array.prototype.slice.call(nodeList)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                    var section = _step.value;
-
-                    var sectionID = section.getAttribute("data-anchor-trigger");
-                    var sectionName = section.getAttribute("data-goto-title");
-                    template += "<li><button data-anchor=\"" + sectionID + "\" class=\" childChapter\">" + sectionName + "</button></li>";
-                }
-            } catch (err) {
-                _didIteratorError = true;
-                _iteratorError = err;
-            } finally {
-                try {
-                    if (!_iteratorNormalCompletion && _iterator.return) {
-                        _iterator.return();
-                    }
-                } finally {
-                    if (_didIteratorError) {
-                        throw _iteratorError;
-                    }
-                }
-            }
-
-            document.getElementById("chapter-insert").innerHTML = template;
-
-            _parallaxScroll2.default.initial(viewDocBody, document.getElementById("view-outer"));
-        }
-
-        //高度样式重新计算，重置滚动窗口
-        document.getElementById("view-outer").scrollTop = 0;
-        view.style.height = window.getComputedStyle(viewDocBody).height;
-
-        _observe2.default.emit("iframe-load");
-    }
-};
+__webpack_require__(7);
+__webpack_require__(6);
 
 /***/ }),
 /* 12 */
@@ -747,10 +927,49 @@ exports.default = {
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _functional = __webpack_require__(4);
+
+var _functional2 = _interopRequireDefault(_functional);
+
+var _observe = __webpack_require__(0);
+
+var _observe2 = _interopRequireDefault(_observe);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Created by Dogfish on 2017/6/4.
+ */
+exports.default = {
+    initial: function initial() {
+
+        _functional2.default.clickListen();
+        _functional2.default.scrollListen();
+        _functional2.default.parallaxListen();
+        _functional2.default.chapterGenerator();
+        _functional2.default.imgLoadListen();
+        _functional2.default.refitStyle();
+
+        document.getElementById("view-outer").scrollTop = 0;
+        _observe2.default.emit("iframe-load");
+    }
+};
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _parallaxScroll = __webpack_require__(22);
+var _parallaxScroll = __webpack_require__(23);
 
 var _parallaxScroll2 = _interopRequireDefault(_parallaxScroll);
 
@@ -762,8 +981,8 @@ var newParallaxScroll = new _parallaxScroll2.default(); /**
 exports.default = newParallaxScroll;
 
 /***/ }),
-/* 13 */,
-/* 14 */
+/* 14 */,
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -773,7 +992,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-__webpack_require__(3);
+__webpack_require__(5);
 
 function attrListener() {
     this.attrList = {};
@@ -828,7 +1047,7 @@ attrListener.prototype.remove = function (attr, callback) {
 exports.default = attrListener;
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -838,7 +1057,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-__webpack_require__(3);
+__webpack_require__(5);
 
 function attrLoader() {
     this.attrList = {};
@@ -962,7 +1181,7 @@ attrLoader.prototype.remove = function (attr, callback) {
 exports.default = attrLoader;
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1017,7 +1236,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1031,7 +1250,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                                                                                                                                                                                                                                                                * Created by Dogfish on 2017/4/17.
                                                                                                                                                                                                                                                                                */
 
-var _redo = __webpack_require__(23);
+var _redo = __webpack_require__(24);
 
 var _redo2 = _interopRequireDefault(_redo);
 
@@ -1113,7 +1332,7 @@ autoBuffer.prototype.stopBuffer = function () {
 exports.default = autoBuffer;
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1519,7 +1738,7 @@ var hg = {
 exports.default = hg;
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1613,7 +1832,7 @@ moduleLoader.prototype.onload = function (count, total, name, type, link) {};
 exports.default = moduleLoader;
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1623,7 +1842,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _moduleLoader = __webpack_require__(19);
+var _moduleLoader = __webpack_require__(20);
 
 var _moduleLoader2 = _interopRequireDefault(_moduleLoader);
 
@@ -1657,7 +1876,7 @@ function moduleLoaderStep(list, onload, complete) {
 exports.default = moduleLoaderStep;
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1785,7 +2004,7 @@ observe.prototype.emitByStep = function (event, arg) {
 exports.default = observe;
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1795,7 +2014,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _autoBuffer = __webpack_require__(17);
+var _autoBuffer = __webpack_require__(18);
 
 var _autoBuffer2 = _interopRequireDefault(_autoBuffer);
 
@@ -1930,7 +2149,7 @@ function pxToNumber(pxValue) {
 exports.default = parallax;
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

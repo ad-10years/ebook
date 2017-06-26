@@ -22,6 +22,9 @@ const bookListData = [
         name: "起·舞弄清影",type:CHAPTER,
         link: "",
     }, {
+        name: "起·舞弄清影-导语",type:CHILD_CHAPTER,
+        link: "./contents/起/导语.html",
+    },{
         name: "十年一觉广告梦",type:CHILD_CHAPTER,
         link: "./contents/起/十年一觉广告梦.html",
     },
@@ -32,6 +35,9 @@ const bookListData = [
         name: "承·恩雨露流",type:CHAPTER,
         link: "",
     }, {
+        name: "承·恩雨露流-导语",type:CHILD_CHAPTER,
+        link: "./contents/承/导语.html",
+    },{
         name: "沈伟：一桥筑梦初心显",type:CHILD_CHAPTER,
         link: "./contents/承/沈伟采访.html",
     }, {
@@ -45,21 +51,47 @@ const bookListData = [
     //转·眼光阴暑渐除
 
     {
-        name: "转·眼光阴暑渐除",type:CHAPTER,
+        name: "转·眼光阴暑渐消",type:CHAPTER,
         link: "",
     }, {
-        name: "未确定的标题内容",type:CHILD_CHAPTER,
-        link: "",
+        name: "转·眼光阴暑渐消-导语",type:CHILD_CHAPTER,
+        link: "./contents/转/导语.html",
     },
-
+    {
+        name: "采访：陈汉",type:CHILD_CHAPTER,
+        link: "./contents/转/陈汉.html",
+    },
+    {
+        name: "采访：胡倩苑",type:CHILD_CHAPTER,
+        link: "./contents/转/胡倩苑.html",
+    },
+    {
+        name: "采访：黄汇东",type:CHILD_CHAPTER,
+        link: "./contents/转/黄汇东.html",
+    },
+    {
+        name: "采访：虞晨",type:CHILD_CHAPTER,
+        link: "./contents/转/虞晨.html",
+    },{
+        name: "采访：陈国濠",type:CHILD_CHAPTER,
+        link: "./contents/转/陈国濠.html",
+    },
     //合·睦此生乐百年
-
     {
         name: "合·睦此生乐百年",type:CHAPTER,
         link: "",
-    }, {
-        name: "未确定的标题内容",type:CHILD_CHAPTER,
-        link: "",
+    },  {
+        name: "合睦此生乐百年-导语",type:CHILD_CHAPTER,
+        link: "./contents/合/导语.html",
+    },{
+        name: "历届优秀作品·平面类",type:CHILD_CHAPTER,
+        link: "./contents/合/历届优秀作品·平面类.html",
+    },{
+        name: "历届优秀作品·策划类",type:CHILD_CHAPTER,
+        link: "./contents/合/历届优秀作品·策划类.html",
+    },{
+        name: "历届优秀作品·视频类",type:CHILD_CHAPTER,
+        link: "./contents/合/历届优秀作品·视频类.html",
     }
 ]
 const buttonTemplate = `<li><button data-href="%LINK%">%NAME%</button></li>`;

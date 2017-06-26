@@ -30,6 +30,7 @@ import attrListenCallback from "./attrListen/functional"
         observe.on("data-page",attrListenCallback.innerPageJumping)
         observe.on("data-anchor",attrListenCallback.anchorJumping)
         observe.on("data-id",attrListenCallback.idEventDispatch)
+        observe.on("class-active",attrListenCallback.activeClass)
 
         observe.emit("initial")
     }

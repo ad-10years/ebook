@@ -1,0 +1,34 @@
+@import "../vars";
+button.big{
+
+  background-color: transparent;
+
+  color: black;
+  margin: 1rem auto;
+  height: 3rem;
+  transition: .5s;
+  cursor: pointer ;
+
+  &:hover{
+    color: white;
+    border: 2px transparent solid;
+    background-color: black;
+  }
+}
+
+@media only screen and (max-device-width: @screenLimit){
+  button.big{
+    width: 100%;
+    display: block;
+    border: 1px lightgrey solid;
+    border-left: 2px transparent solid;
+    border-right: 2px transparent solid;
+  }
+}
+
+@media only screen and (min-device-width: @screenLimit){
+  button.big{
+    width: 350px;
+    border: 2px black solid;
+  }
+}

@@ -3,46 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<link href=".././stylesheets/innerContent.98fb59f8.css?98fb59f8dc10088d537b" rel="stylesheet"></head>
-
-
+<link href=".././stylesheets/innerContent.b78b8f0d.css?b78b8f0d25f0b17ce849" rel="stylesheet"></head>
 
 <style>
-    .parallax-scroll.head-img{
-        background-image: -moz-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
-        background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
-        background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%),url('../assets/image/0001-header.jpg');
-        background-size: cover;
-        height: 200px;
-        width: 100%;
-        z-index: -2;
-        left:0
-    }
-    main{
-        background-color: white;
-        height: 40rem;
-        padding: 0;
-    }
+
+
+
 </style>
 
-<header class="article">
-    <div class="parallax-scroll head-img" parallax-speed="0.5"></div>
-    <div class="title">
-        <h1> 目录导航</h1>
-    </div>
-</header>
 
 <body>
-<main>
-    <div class="card">
-        <img src="../assets/image/0001-header.jpg">
-        <div class="intro">
-            <h1 class="title">叫我标题</h1>
-            <p class="text">hahahahah introdution</p>
-            <button class="link">阅读</button>
-        </div>
+<main class="template-append">
+
+    <div class="contents">
+
+
+        <section class="content">
+            <header>
+                <h1 style="text-align: center;color: white">目录</h1>
+            </header>
+
+            <section id="起舞弄清影" class="contents-page is-active">
+                <h1>起·舞弄清影</h1>
+                <p class="intro">包含章节</p>
+                <ul class="child-chapter">
+                    <li>
+                        <button data-href="./contents/起/导语.html">起舞弄清影·前言</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/起/十年一觉广告梦.html" class="childChapter">十年一觉广告梦</button>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="承恩雨露留" class="contents-page">
+                <h1>承·恩雨露留</h1>
+                <p class="intro">包含章节</p>
+                <ul class="child-chapter">
+                    <li>
+                        <button data-href="./contents/承/导语.html" class="childChapter">承恩雨露留·前言</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/承/沈伟采访.html" class="childChapter">沈伟：一桥筑梦初心显</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/承/周燕采访.html" class="childChapter">周燕：喜欢才会坚持</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/承/钟旭采访.html" class="childChapter">钟旭：多去涉猎知识</button>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="转眼光影暑渐消" class="contents-page">
+                <h1>转眼·光阴暑渐消</h1>
+                <p class="intro">包含章节</p>
+                <ul class="child-chapter">
+                    <li>
+                        <button data-href="./contents/转/导语.html" class="childChapter">转眼光影暑渐消·前言</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/转/黄汇东.html" class="childChapter">采访：黄汇东</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/转/胡倩苑.html" class="childChapter">采访：胡倩苑</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/转/虞晨.html" class="childChapter">采访：虞晨</button>
+                    </li>
+                    <li>
+                        <button data-href="./contents/转/陈国濠.html" class="childChapter">采访：陈国濠</button>
+                    </li>
+                </ul>
+            </section>
+
+            <section id="合睦此生乐百年" class="contents-page">
+
+            </section>
+        </section>
+
+        <section class="side">
+            <ul>
+                <li><button id="btn-1" img-link="../assets/image/分割页/起.jpg" class="contents-btn is-active" tag-key="is-active" tag-remove=".contents-btn,.contents-page" tag-add="#起舞弄清影,#btn-1">起</button></li>
+                <li><button id="btn-2" img-link="../assets/image/分割页/承.jpg" class="contents-btn" tag-key="is-active" tag-remove=".contents-btn,.contents-page" tag-add="#承恩雨露留,#btn-2">承</button></li>
+                <li><button id="btn-3" img-link="../assets/image/分割页/转.jpg" class="contents-btn" tag-key="is-active" tag-remove=".contents-btn,.contents-page" tag-add="#转眼光影暑渐消,#btn-3">转</button></li>
+                <li><button id="btn-4" img-link="../assets/image/分割页/合.jpg" class="contents-btn" tag-key="is-active" tag-remove=".contents-btn,.contents-page" tag-add="#合睦此生乐百年,#btn-4">合</button></li>
+            </ul>
+        </section>
+
+        <div class="mask"></div>
+        <section class="background">
+            <img src="../assets/image/分割页/起.jpg">
+        </section>
+
     </div>
 </main>
+<script>
+    (function () {
+        document.querySelector(".side").addEventListener("click",function (event) {
+            if(!event.target.hasAttribute("img-link")){return}
+            document.querySelector(".contents section.background img").src = event.target.getAttribute("img-link");
+        })
+    })()
+    /*
+    (function () {
+        var cardData = [
+            {chapter:"chapter-1",title:"第一章：起舞弄清影",intro:"暂时没有写简介",imageLink:"../assets/image/0001-header.jpg"}
+        ]
 
-<script type="text/javascript" src=".././javascripts/innerContent.98fb59f8.js?98fb59f8dc10088d537b"></script></body>
+        var cardTemplate = '<div class="card %chapter%">' +
+            '<div class="img"><img src="%imageLink%" ><div class="mask"></div></div>' +
+            '<div class="intro"> <h1 class="title">%title%</h1>' +
+            '<p class="text">%intro%</p> <button class="link">阅读</button></div></div>'
+
+        var keyName  = ""
+        var outputTemplate = ""
+        var tmp = ""
+
+        for(var i=0;i<cardData.length;i++){
+            tmp = cardTemplate
+            for(var j=0;j<Object.keys(cardData[i]).length;j++){
+                keyName = Object.keys(cardData[i])[j]
+                tmp = tmp.replace("%"+keyName+"%",cardData[i][keyName])
+            }
+            outputTemplate += tmp;
+            tmp = "";
+        }
+
+        document.querySelector(".template-append").innerHTML += outputTemplate
+
+    })()*/
+
+</script>
+
+<script type="text/javascript" src=".././javascripts/innerContent.b78b8f0d.js?b78b8f0d25f0b17ce849"></script></body>
 </html>

@@ -1,4 +1,4 @@
 /**
  * Created by Dogfish on 2017/5/29.
  */
-require("./common-style.less")
+require("./style/main.less")

@@ -3,6 +3,8 @@
  */
 import template from "../template";
 import nodeTracker from "../../components/DOMtracker"
+import iframeFnc from "../iframe/functional"
+
 function menuSwitch(status) {
     let menu = $(".popMenu");
     let menuButton =  $(".hamburger--collapse")
@@ -38,6 +40,7 @@ export default {
         //链接内部跳转
         $("[data-href]").removeClass("is-active")
         $(`[data-href="${attrVal}"]`).addClass("is-active")
+
         document.getElementById("view").src = attrVal
         menuSwitch(false)
 
@@ -52,12 +55,12 @@ export default {
         eventTarget.classList.add("is-active")
         menuSwitch(true)
 
-        //特殊页面的处理
+        //特殊页面的处理，例如跳转章节页面后，滚动到指定的激活位置
         switch (attrVal){
             case "chapter-list":
                 let node = nodeTracker.getNodeByAttr("class",document.querySelector("[data-append=all-chapter] button.is-active"),"chapter-wrapper")
                 if(node){
-                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop
+                    document.querySelector('[data-page-target=chapter-list]').scrollTop = node.offsetTop + 100
                 }
                 break
             default:
@@ -83,4 +86,25 @@ export default {
                 break
         }
     },
+    activeClass({eventTarget,attrVal,key}){
+        let view =  $("#view").contents()
+        let tagKey = attrVal
+        //自己所属的标记
+        let removeSelector = eventTarget.getAttribute("tag-remove")
+        if(removeSelector){
+            $(removeSelector).removeClass(tagKey)
+            view.find(removeSelector).removeClass(tagKey)
+        }
+
+        let addSelector = eventTarget.getAttribute("tag-add")
+        if(addSelector){
+            $(addSelector).addClass(tagKey)
+            view.find(addSelector).addClass(tagKey)
+        }
+
+        iframeFnc.refitStyle();
+    },
+    activePage({eventTarget,attrVal,key}){
+
+    }
 }

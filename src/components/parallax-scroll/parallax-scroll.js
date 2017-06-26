@@ -48,7 +48,9 @@ parallax.prototype.onScroll = function ({scrollTop}) {
     let movedDistance = scrollTop - this.lastScrollTop
 
     for(let preset of this.elementList){
-        preset.element.style.top = (pxToNumber(preset.element.style.top) + Number(preset.params["parallax-speed"]) * movedDistance).toFixed(2) + "px"
+        preset.element.style.top = (pxToNumber(preset.element.style.top) + Number(preset.params["parallax-speed"]) * movedDistance).toFixed(2) + "px";
+
+        
     }
 
     this.lastScrollTop = scrollTop

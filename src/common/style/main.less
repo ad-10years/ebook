@@ -1,0 +1,60 @@
+@import "article/p";
+@import "header/article";
+@import "button/big";
+@import "footer";
+@import "components/card";
+@import "components/contents";
+@import "components/collapse";
+//预设样式
+main{
+  padding: 30px 0;
+  .author{
+    color: silver;
+    text-align: right;
+  }
+}
+
+html,body{
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden{
+  display:none ;
+}
+//隐藏滚动条
+*::-webkit-scrollbar{
+display: none!important;
+}
+//视差滚动预设
+.parallax-scroll{
+  position: absolute;
+
+  .mask{
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 50%,rgba(0,0,0,0.75) 100%);
+    background-size: cover;
+    height: 200px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    position: absolute;
+  }
+
+  &.head-img{
+    height: 200px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -2;
+  }
+  img{
+    width: 100%;
+  }
+}
+//字体样式
+span,p,h1,button{
+  font-family: 'PingFang SC', 'Myriad Pro', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
