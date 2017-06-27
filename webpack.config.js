@@ -256,6 +256,17 @@ module.exports = {
                 collapseWhitespace: false
             }
         }),
+        new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
+            filename: __dirname + '/docs/contents/合/广告我爱你.html',
+            template: __dirname + '/src/templates/contents/合/广告我爱你.html',
+            inject:  'body',
+            hash: true,
+            chunks: ['innerContent'],
+            minify: { //压缩HTML文件
+                removeComments: true,
+                collapseWhitespace: false
+            }
+        }),
     ]
 };
 

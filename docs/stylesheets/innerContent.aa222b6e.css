@@ -46,6 +46,9 @@ article blockquote {
 article img {
   width: 100%;
   transition: .3s;
+  display: block;
+  margin: 0 auto;
+  max-width: 50rem;
 }
 article section {
   padding-bottom: 2rem;

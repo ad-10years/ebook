@@ -184,6 +184,9 @@ var bookListData = [{
 }, {
     name: "历届优秀作品·视频类", type: CHILD_CHAPTER,
     link: "./contents/合/历届优秀作品·视频类.html"
+}, {
+    name: "广告我爱你！", type: CHILD_CHAPTER,
+    link: "./contents/合/广告我爱你.html"
 }];
 var buttonTemplate = "<li><button data-href=\"%LINK%\">%NAME%</button></li>";
 var wrapperTemplate = "<div class=\"chapter-wrapper\">\n                        <div class=\"col s12 mainText\">\n                            <h1>%TITLE%</h1>\n                        </div>\n                        <div class=\"col s12 links\">\n                            <ul class=\"section links-inner\">\n                                %BUTTONS_TEMPLATE%\n                            </ul>\n                        </div>\n                    </div>";

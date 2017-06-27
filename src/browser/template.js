@@ -92,6 +92,9 @@ const bookListData = [
     },{
         name: "历届优秀作品·视频类",type:CHILD_CHAPTER,
         link: "./contents/合/历届优秀作品·视频类.html",
+    },{
+        name: "广告我爱你！",type:CHILD_CHAPTER,
+        link: "./contents/合/广告我爱你.html",
     }
 ]
 const buttonTemplate = `<li><button data-href="%LINK%">%NAME%</button></li>`;
