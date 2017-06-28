@@ -15,13 +15,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-138">
-              <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+            <state relative-caret-position="-234">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding>
-                <marker date="1498639324043" expanded="true" signature="2786:2803" ph="..." />
+                <marker date="1498639867106" expanded="true" signature="2786:2803" ph="..." />
               </folding>
             </state>
           </provider>
@@ -77,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="周燕采访.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="周燕采访.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/templates/contents/承/周燕采访.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state relative-caret-position="364">
+              <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -232,13 +232,13 @@
         <option value="$PROJECT_DIR$/src/browser/template.js" />
         <option value="$PROJECT_DIR$/src/templates/contents/合/广告我爱你.html" />
         <option value="$PROJECT_DIR$/src/browser/style/style.less" />
-        <option value="$PROJECT_DIR$/src/templates/contents/承/周燕采访.html" />
         <option value="$PROJECT_DIR$/src/templates/index.html" />
         <option value="$PROJECT_DIR$/src/templates/contents/contents.html" />
         <option value="$PROJECT_DIR$/src/browser/attrLoader/attrLoader.js" />
         <option value="$PROJECT_DIR$/src/templates/contents/合/历届优秀作品·平面类.html" />
         <option value="$PROJECT_DIR$/src/templates/contents/承/沈伟采访.html" />
         <option value="$PROJECT_DIR$/docs/index.html" />
+        <option value="$PROJECT_DIR$/src/templates/contents/承/周燕采访.html" />
       </list>
     </option>
   </component>
@@ -1243,12 +1243,12 @@
       <workItem from="1498392369452" duration="8075000" />
       <workItem from="1498444133796" duration="14486000" />
       <workItem from="1498538904080" duration="4457000" />
-      <workItem from="1498638496214" duration="826000" />
+      <workItem from="1498638496214" duration="1412000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="275780000" />
+    <option name="totallyTimeSpent" value="276366000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="2578" height="1060" extended-state="6" />
@@ -1687,21 +1687,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/templates/contents/承/周燕采访.html">
+    <entry file="file://$PROJECT_DIR$/docs/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-234">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+          <folding>
+            <marker date="1498639867106" expanded="true" signature="2786:2803" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/index.html">
+    <entry file="file://$PROJECT_DIR$/src/templates/contents/承/周燕采访.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-138">
-          <caret line="16" column="41" lean-forward="false" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-          <folding>
-            <marker date="1498639324043" expanded="true" signature="2786:2803" ph="..." />
-          </folding>
+        <state relative-caret-position="364">
+          <caret line="50" column="0" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
